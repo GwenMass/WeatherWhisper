@@ -67,7 +67,7 @@
             <Text layoutX="55.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wind: Dirct, MPH" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
             	<image>
-            		<Image url="WindDirection.png"/>
+            		<Image url="@WindDirection.png"/>
         		</image>
     		</ImageView>
          </children>
