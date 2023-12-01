@@ -1,0 +1,62 @@
+.roundedPane {
+    -fx-background-radius: 10px;
+    -fx-background-color: #ADD8E6;
+}
+
+.anchorLabel{
+	-fx-font-family: monospaced;
+    -fx-font-size: 16px; /* Set the font size */
+    -fx-font-weight: bold;
+}
+
+.labelBox{
+	-fx-alignment: center;
+}
+
+#locTextField{
+	-fx-font-family: "monospaced";
+    -fx-font-size: 16px; /* Set the font size */
+    -fx-alignment: center;
+}
+
+#tabs{
+	-fx-background-color: #ADD8E6;
+}
+
+.tab-pane .tab-header-background {
+    -fx-background-color: #03414f;
+}
+
+#hourlyHbox{
+    -fx-spacing: 10; /* Adjust the spacing value as needed */
+}
+
+#hourlyHbox .pane{
+    -fx-alignment: center; /* Center align the content within each pane */
+}
+
+#dailyVbox{
+	-fx-padding: 10;
+}
+
+#dailyVbox .pane{
+	-fx-padding: 5;
+}
+
+.tab {
+    -fx-font-family: "monospaced"; 
+    -fx-font-size: 14px; 
+    -fx-font-style: italic; 
+}
+
+.text-field {
+    -fx-alignment: CENTER;
+	-fx-font-family: monospaced;
+    -fx-font-size: 16px; /* Set the font size */
+    -fx-font-weight: bold;
+}
+
+
+
+
+

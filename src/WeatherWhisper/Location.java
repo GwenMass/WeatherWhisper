@@ -1,4 +1,4 @@
-package WeatherWhisper;
+package weatherwhisper;
 //Creates a location object for weather data.
 public class Location {
 private String cityName;

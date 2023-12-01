@@ -1,4 +1,4 @@
-package WeatherWhisper;
+package weatherwhisper;
 
 public class UserInterface {
 
