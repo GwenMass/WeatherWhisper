@@ -1,4 +1,4 @@
-package weatherwhisper;
+package WeatherWhisper;
 
 public class WeatherDataPI {
 
