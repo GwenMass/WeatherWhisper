@@ -9,7 +9,7 @@ public class WeatherDataAPI {
 	private JSONObject weatherData;
 	private Object address;
 	private Object currentTemp;
-	private Object currentConditions;
+	private Object currentSkyConditions;
 	private Object currentWindSpeed;
 	private Object currentWindDirection;
 	private ArrayList<Object> hourlyTemps;
@@ -30,7 +30,7 @@ public class WeatherDataAPI {
 		
 		setAddress();
 		setCurrentTemp();
-		setCurrentConditions();
+		setCurrentSkyConditions();
 		setCurrentWindSpeed();
 		setCurrentWindDirection();
 		setHourlyTemps();
@@ -50,36 +50,36 @@ public class WeatherDataAPI {
 		return address;
 	}
 	
-	// Sets currentTemp based on "temp" field of the first JSONOBject/day (index 0) in the "days" JSONArray
+	// Sets currentTemp based on "temp" field of the "currentConditions" JSONObject
 	public void setCurrentTemp() {
-		currentTemp = weatherData.getJSONArray("days").getJSONObject(0).get("temp");
+		currentTemp = weatherData.getJSONObject("currentConditions").get("temp");
 	}
 	
 	public Object getCurrentTemp() {
 		return currentTemp;
 	}
 	
-	// Sets currentConditions based on "conditions" field of the first JSONOBject/day (index 0) in the "days" JSONArray
-	public void setCurrentConditions() {
-		currentConditions = weatherData.getJSONArray("days").getJSONObject(0).get("conditions");
+	// Sets currentSkyConditions based on "conditions" field of the "currentConditions" JSONObject
+	public void setCurrentSkyConditions() {
+		currentSkyConditions = weatherData.getJSONObject("currentConditions").get("conditions");
 	}
 	
-	public Object getCurrentConditions() {
-		return currentConditions;
+	public Object getCurrentSkyConditions() {
+		return currentSkyConditions;
 	}
 	
-	// Sets currentWindSpeed based on "windspeed" field of the first JSONOBject/day (index 0) in the "days" JSONArray
+	// Sets currentWindSpeed based on "windspeed" field of the "currentConditions" JSONObject
 	public void setCurrentWindSpeed() {
-		currentWindSpeed = weatherData.getJSONArray("days").getJSONObject(0).get("windspeed");
+		currentWindSpeed = weatherData.getJSONObject("currentConditions").get("windspeed");
 	}
 	
 	public Object getCurrentWindSpeed() {
 		return currentWindSpeed;
 	}
 	
-	// Sets currentWindDirection based on "winddir" field of the first JSONOBject/day (index 0) in the "days" JSONArray
+	// Sets currentWindDirection based on "winddir" field of the "currentConditions" JSONObject
 	public void setCurrentWindDirection() {
-		currentWindDirection = weatherData.getJSONArray("days").getJSONObject(0).get("winddir");
+		currentWindDirection = weatherData.getJSONObject("currentConditions").get("winddir");
 	}
 	
 	public Object getCurrentWindDirection() {

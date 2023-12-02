@@ -12,7 +12,7 @@ public class WeatherApp {
 		// Also for demonstration:
 		System.out.println("Address: " + weatherDataCity1.getAddress());
 		System.out.println("Current Temp: " + weatherDataCity1.getCurrentTemp());
-		System.out.println("Current Conditions: " + weatherDataCity1.getCurrentConditions());
+		System.out.println("Current Conditions: " + weatherDataCity1.getCurrentSkyConditions());
 		System.out.println("TempMax (today): " + weatherDataCity1.getDailyMaxTemps().get(0));
 		System.out.println("TempMin (today): " + weatherDataCity1.getDailyMinTemps().get(0));
 		System.out.println("Current Windspeed: " + weatherDataCity1.getCurrentWindSpeed());
