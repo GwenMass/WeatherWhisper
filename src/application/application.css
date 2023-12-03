@@ -9,14 +9,17 @@
     -fx-font-weight: bold;
 }
 
-.labelBox{
+.labelBox {
+	-fx-alignment: center;
+}
+
+.fieldBox{
 	-fx-alignment: center;
 }
 
 #locTextField{
 	-fx-font-family: "monospaced";
-    -fx-font-size: 16px; /* Set the font size */
-    -fx-alignment: center;
+    -fx-font-size: 16px; 
 }
 
 #tabs{
@@ -24,7 +27,7 @@
 }
 
 .tab-pane .tab-header-background {
-    -fx-background-color: #03414f;
+    -fx-opacity: 0;
 }
 
 #hourlyHbox{
@@ -43,17 +46,49 @@
 	-fx-padding: 5;
 }
 
-.tab {
-    -fx-font-family: "monospaced"; 
-    -fx-font-size: 14px; 
-    -fx-font-style: italic; 
-}
-
 .text-field {
     -fx-alignment: CENTER;
 	-fx-font-family: monospaced;
     -fx-font-size: 16px; /* Set the font size */
     -fx-font-weight: bold;
+}
+
+.tab:selected{
+	-fx-background-color: rgb(35, 131, 158);
+	-fx-transition: ease .3;
+}
+
+.tab {
+    -fx-font-family: "monospaced";
+    -fx-font-size: 14px; 
+    -fx-font-style: italic; 
+    -fx-color: #03414f;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+}
+
+.tab:hover{
+	-fx-background-color: rgb(35, 131, 158);
+    -fx-background-radius: 5px; /* Optional: Add rounded corners for better visual appearance */
+    -fx-cursor: hand; /* Change cursor to a pointer */
+    -fx-transition: -fx-background-color 0.3s ease, -fx-translate-y 0.3s ease;
+    -fx-translate-y: 1px; /* Adjust the value based on your desired sliding distance */
+}
+
+.tab-header-area{
+	-fx-padding: 2px 85px;
+}
+
+.button{
+	-fx-background-color: rgb(35, 131, 158);
+	-fx-text-fill: white;
+	-fx-font-family: "monospaced";
+	-fx-font-size: 12px;
+	-fx-font-weight: bold;
+}
+
+.button:hover{
+	-fx-cursor: hand;
 }
 
 
