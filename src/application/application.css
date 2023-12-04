@@ -1,6 +1,7 @@
 .roundedPane {
     -fx-background-radius: 10px;
     -fx-background-color: #ADD8E6;
+    -fx-opacity: .8;
 }
 
 .anchorLabel{
