@@ -1,5 +1,8 @@
 package WeatherWhisper;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import org.json.*;
 
@@ -17,6 +20,7 @@ public class WeatherDataAPI {
 	private ArrayList<Object> hourlyPrecipProbs;
 	private ArrayList<Object> dailyMaxTemps;
 	private ArrayList<Object> dailyMinTemps;
+	private ZonedDateTime time;
 
 	// Constructs all relevant weather data contained in given JSON file
 	public WeatherDataAPI (JSONObject weatherData){
@@ -38,6 +42,7 @@ public class WeatherDataAPI {
 		setHourlyPrecipProbs();
 		setDailyMaxTemps();
 		setDailyMinTemps();
+		setTime();
 	}
 	
 	// Set address of city according to resolved address determined by Visual Crossing API
@@ -156,5 +161,46 @@ public class WeatherDataAPI {
 		return dailyMinTemps;
 	}
 	
+	// Determines the local time of the city whose weather is being stored by converting our system time to the city's local time via
+	// timezones. We ignore the "datetime" and "datetimeEpoch" JSON variables because they only update in intervals of 15 minutes while 
+	// also not always showing the most recent 15-minute marker (likely due to the free pricing plan of the Visual Crossing API), which
+	// can be problematic if the city's time is 3:08pm and the JSON is storing 2:45pm, for example.
+	public void setTime() {
+		// Determine weather-location's time zone
+		String locationTimeZone = (String) weatherData.get("timezone");
+		ZoneId locationZone = ZoneId.of(locationTimeZone);
+		
+		// Determine system's time zone
+		LocalDateTime systemTime = LocalDateTime.now();
+		ZoneId systemZone = ZoneId.systemDefault();
+		
+		// Convert system's local time to weather-location's local time
+		ZonedDateTime currentZonedDateTime = ZonedDateTime.of(systemTime, systemZone);
+		ZonedDateTime locationZonedDateTime = currentZonedDateTime.withZoneSameInstant(locationZone);
+		
+		time = locationZonedDateTime;
+		
+		/* The following methods of the ZonedDateTime class (which we use for the 'time' variable) can be used to show relevant data
+		System.out.println(time.toLocalTime());	// output example: "15:48:53.917602600" (Hour: Minutes: Seconds w/ precision)
+		
+		System.out.println(time.getHour());		// output example: "15"
+		// Note: The WeatherDataAPI class (this class) has a getHour() for the sake of convenience
+		System.out.println(time.getMinute());	// output example: "48"
+		System.out.println(time.getHour()%12 + ":" + time.getMinute());		// output example: "3:52"
+		
+		DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		System.out.println(time.format(formatter));	// output example: "2023-12-01 15:48:53"
+		
+		//The DateTimeFormatter.ofPattern method above can be used to produce different formats (e.g., "HH:mm" -> Hour:minute)
+		*/ 
+	}
+	
+	public ZonedDateTime getTime() {
+		return time;
+	}
+	
+	public int getHour() {
+		return time.getHour();
+	}
 	
 }
