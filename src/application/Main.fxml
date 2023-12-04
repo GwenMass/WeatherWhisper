@@ -16,7 +16,9 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml" 
+      fx:controller="application.FXMLController">
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="1049.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="15.0" layoutY="326.0" prefHeight="200.0" prefWidth="318.0" styleClass="roundedPane" AnchorPane.leftAnchor="15.0">
@@ -25,37 +27,37 @@
                <children>
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
-                        <Text layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D1" />
+                        <Text fx:id="D1" layoutX="7.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D1" />
                         <ImageView fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                        <Text layoutX="260.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L: " />
+                        <Text fx:id="D1F" layoutX="245.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
-                        <Text layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D2" />
+                        <Text fx:id="D2" layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D2" />
                         <ImageView fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                        <Text layoutX="260.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L: " />
+                        <Text fx:id="D2F" layoutX="245.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
-                        <Text layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D3" />
+                        <Text fx:id="D3" layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D3" />
                         <ImageView fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                        <Text layoutX="260.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L: " />
+                       <Text fx:id="D3F" layoutX="245.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
-                        <Text layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D4" />
+                        <Text fx:id="D4" layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D4" />
                         <ImageView fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                        <Text layoutX="260.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L: " />
+                        <Text fx:id="D4F" layoutX="245.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
-                        <Text layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D5" />
+                        <Text fx:id="D5" layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D5" />
                         <ImageView fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                        <Text layoutX="260.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L: " />
+                        <Text fx:id="D5F" layoutX="245.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                </children>
@@ -65,7 +67,7 @@
       <Pane layoutX="350.0" layoutY="326.0" prefHeight="200.0" prefWidth="200.0" styleClass="roundedPane">
          <children>
             <Text layoutX="31.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wind Speed and Direction" style="-fx-font-weight: bold;"/>
-            <Text layoutX="55.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wind: Dirct, MPH" />
+            <Text fx:id = "currentWind" layoutX="55.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wind Direction: Speed:" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
             	<image>
             		<Image url="@WindDirection.png"/>
@@ -75,7 +77,7 @@
       </Pane>
       <Pane layoutX="607.0" layoutY="201.0" prefHeight="325.0" prefWidth="373.0" styleClass="roundedPane">
          <children>
-            <Text layoutX="105.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precipitation Radar: City, State " style="-fx-font-weight: bold;"/>
+            <Text fx:id = "radarDisp" layoutX="105.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precipitation Radar: City, State " style="-fx-font-weight: bold;"/>
             <Pane layoutX="21.0" layoutY="24.0" prefHeight="282.0" prefWidth="331.0" style="-fx-background-color: blue;">
                <children>
                   <ImageView fitHeight="282.0" fitWidth="331.0" pickOnBounds="true" preserveRatio="true" />
@@ -93,50 +95,50 @@
                            <children>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T1" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "T11" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T1" />
+                                    <Text fx:id = "T1F" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T2" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "T21" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T2" />
+                                    <Text fx:id = "T2F" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T3" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "T31" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T3" />
+                                    <Text fx:id = "T3F" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T4" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "T41" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T4" />
+                                    <Text fx:id = "T4F" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T5" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "T51" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T5" />
+                                    <Text fx:id = "T5F" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T6" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "T61" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T6" />
+                                    <Text fx:id = "T6F" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T7" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "T71" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T7" />
+                                    <Text fx:id = "T7F" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
@@ -157,50 +159,51 @@
                            <children>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T1" />
+                                    <Text fx:id = "T12" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T1" />
+                                    <Text fx:id = "T1C" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
+                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="87.0" prefWidth="68.0">
+                                 <children>
+                                    <Text fx:id = "T22" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T2" />
+                                    <Text  fx:id = "T2C" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
+                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="87.0" prefWidth="68.0">
+                                 <children>
+                                    <Text fx:id = "T32" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T3" />
+                                    <Text  fx:id = "T3C" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
+                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="87.0" prefWidth="68.0">
+                                 <children>
+                                    <Text  fx:id = "T42" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T4" />
+                                    <Text  fx:id = "T4C" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
+                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="87.0" prefWidth="68.0">
+                                 <children>
+                                    <Text  fx:id = "T52" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T5" />
+                                    <Text  fx:id = "T5C" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
+                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="87.0" prefWidth="68.0">
+                                 <children>
+                                    <Text  fx:id = "T62" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T6" />
+                                    <Text  fx:id = "T6C" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
                                     <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T2" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </Pane>
-                              <Pane prefHeight="87.0" prefWidth="68.0">
-                                 <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T3" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </Pane>
-                              <Pane prefHeight="87.0" prefWidth="68.0">
-                                 <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T4" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </Pane>
-                              <Pane prefHeight="87.0" prefWidth="68.0">
-                                 <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T5" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </Pane>
-                              <Pane prefHeight="87.0" prefWidth="68.0">
-                                 <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T6" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </Pane>
-                              <Pane prefHeight="87.0" prefWidth="68.0">
-                                 <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T7" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
+                                    <Text  fx:id = "T72" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T7" />
+                                    <Text  fx:id = "T7C" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
@@ -221,50 +224,50 @@
                            <children>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T1" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <Text fx:id = "T13" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T2" />
+                                    <Text fx:id = "T1W" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T2" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <Text fx:id = "T23" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T2" />
+                                    <Text fx:id = "T2W" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T3" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <Text fx:id = "T33" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T3" />
+                                    <Text fx:id = "T3W" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T4" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <Text fx:id = "T43" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T4" />
+                                    <Text fx:id = "T4W" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T5" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <Text fx:id = "T53" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T5" />
+                                    <Text fx:id = "T5W" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T6" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <Text fx:id = "T63" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T6" />
+                                    <Text fx:id = "T6W" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T7" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <Text fx:id = "T73" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T7" />
+                                    <Text fx:id = "T7W" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
@@ -285,50 +288,50 @@
                            <children>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T1" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
+									<Text fx:id = "T14" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T2" />
+                                    <Text fx:id = "T1P" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T2" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
+                                    <Text fx:id = "T24" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T2" />
+                                    <Text fx:id = "T2P" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T3" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
+                                    <Text fx:id = "T34" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T3" />
+                                    <Text fx:id = "T3P" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T4" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
+                                    <Text fx:id = "T44" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T4" />
+                                    <Text fx:id = "T4P" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T5" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
+                                    <Text fx:id = "T54" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T5" />
+                                    <Text fx:id = "T5P" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T6" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
+                                    <Text fx:id = "T64" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T6" />
+                                    <Text fx:id = "T6P" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
-                                    <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T7" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
+                                    <Text fx:id = "T74" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T7" />
+                                    <Text fx:id = "T7P" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
@@ -343,18 +346,19 @@
       <VBox layoutX="400.0" layoutY="50.0" prefHeight="92.0" prefWidth="225.0" styleClass="labelBox">
       	<children>
         	<HBox styleClass="fieldBox" spacing="5">
-            	<TextField text="Location:" minHeight="30"/>
-            	<Button text="GO" minHeight="29" minWidth="45"/>
+            	<TextField fx:id = "searchBox" text="Location:" minHeight="30"/>
+            	<Button fx:id = "searchButton" text="GO" minHeight="29" minWidth="45" />
         	</HBox>
-        	<Label styleClass="anchorLabel" text="City, State">
+        	<Label fx:id = "address" styleClass="anchorLabel" text="City, State">
             	<padding>
                 	<Insets top="15.0" />
             	</padding>
         	</Label>
-        	<Label styleClass="anchorLabel" text="Degrees" style="-fx-font-size: 20px"></Label>
-        	<Label styleClass="anchorLabel" text="Weather Type"></Label>
-        	<Label styleClass="anchorLabel" text="H: L:"></Label>
+        	<Label fx:id ="currentTemp" styleClass="anchorLabel" text="Degrees" style="-fx-font-size: 20px"></Label>
+        	<Label fx:id ="weatherDesc" styleClass="anchorLabel" text="Weather Type"></Label>
+        	<Label fx:id ="currentBounds" styleClass="anchorLabel" text="H: L:"></Label>
     	</children>
    	</VBox>
    </children>
 </AnchorPane>
+</VBox>
