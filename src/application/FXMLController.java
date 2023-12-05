@@ -131,37 +131,37 @@ public class FXMLController {
 	currentWind.setText("Wind Direction: " + directionToString(weather.getCurrentWindDirection())+" Speed: "+weather.getCurrentWindSpeed()+ " MPH");
 
 	//fields for time for hourly display
-	T11.setText(timeToString(currentHour+1));
-	T21.setText(timeToString(currentHour+2));
-	T31.setText(timeToString(currentHour+3));
-	T41.setText(timeToString(currentHour+4));
-	T51.setText(timeToString(currentHour+5));
-	T61.setText(timeToString(currentHour+6));
-	T71.setText(timeToString(currentHour+7));
+	T11.setText(timeToString((currentHour + 1) % 12));
+	T21.setText(timeToString((currentHour + 2) % 12));
+	T31.setText(timeToString((currentHour + 3) % 12));
+	T41.setText(timeToString((currentHour + 4) % 12));
+	T51.setText(timeToString((currentHour + 5) % 12));
+	T61.setText(timeToString((currentHour + 6) % 12));
+	T71.setText(timeToString((currentHour + 7) % 12));
 	
-	T12.setText(timeToString(currentHour+1));
-	T22.setText(timeToString(currentHour+2));
-	T32.setText(timeToString(currentHour+3));
-	T42.setText(timeToString(currentHour+4));
-	T52.setText(timeToString(currentHour+5));
-	T62.setText(timeToString(currentHour+6));
-	T72.setText(timeToString(currentHour+7));
+	T12.setText(timeToString((currentHour + 1) % 12));
+	T22.setText(timeToString((currentHour + 2) % 12));
+	T32.setText(timeToString((currentHour + 3) % 12));
+	T42.setText(timeToString((currentHour + 4) % 12));
+	T52.setText(timeToString((currentHour + 5) % 12));
+	T62.setText(timeToString((currentHour + 6) % 12));
+	T72.setText(timeToString((currentHour + 7) % 12));
 	
-	T13.setText(timeToString(currentHour+1));
-	T23.setText(timeToString(currentHour+2));
-	T33.setText(timeToString(currentHour+3));
-	T43.setText(timeToString(currentHour+4));
-	T53.setText(timeToString(currentHour+5));
-	T63.setText(timeToString(currentHour+6));
-	T73.setText(timeToString(currentHour+7));
+	T13.setText(timeToString((currentHour + 1) % 12));
+	T23.setText(timeToString((currentHour + 2) % 12));
+	T33.setText(timeToString((currentHour + 3) % 12));
+	T43.setText(timeToString((currentHour + 4) % 12));
+	T53.setText(timeToString((currentHour + 5) % 12));
+	T63.setText(timeToString((currentHour + 6) % 12));
+	T73.setText(timeToString((currentHour + 7) % 12));
 	
-	T14.setText(timeToString(currentHour+1));
-	T24.setText(timeToString(currentHour+2));
-	T34.setText(timeToString(currentHour+3));
-	T44.setText(timeToString(currentHour+4));
-	T54.setText(timeToString(currentHour+5));
-	T64.setText(timeToString(currentHour+6));
-	T74.setText(timeToString(currentHour+7));
+	T14.setText(timeToString((currentHour + 1) % 12));
+	T24.setText(timeToString((currentHour + 2) % 12));
+	T34.setText(timeToString((currentHour + 3) % 12));
+	T44.setText(timeToString((currentHour + 4) % 12));
+	T54.setText(timeToString((currentHour + 5) % 12));
+	T64.setText(timeToString((currentHour + 6) % 12));
+	T74.setText(timeToString((currentHour + 7) % 12));
 	
 	//fields for hourly temperature farenheit
 	T1F.setText(weather.getHourlyTemps().get((currentHour + 1) % 24) + "°F");
