@@ -164,40 +164,40 @@ public class FXMLController {
 	T74.setText(timeToString(currentHour+7));
 	
 	//fields for hourly temperature farenheit
-	T1F.setText(weather.getHourlyTemps().get(currentHour+1) + "°F");
-	T2F.setText(weather.getHourlyTemps().get(currentHour+2)+"°F");
-	T3F.setText(weather.getHourlyTemps().get(currentHour+3)+"°F");
-	T4F.setText(weather.getHourlyTemps().get(currentHour+4)+"°F");
-	T5F.setText(weather.getHourlyTemps().get(currentHour+5)+"°F");
-	T6F.setText(weather.getHourlyTemps().get(currentHour+6)+"°F");
-	T7F.setText(weather.getHourlyTemps().get(currentHour+7)+"°F");
+	T1F.setText(weather.getHourlyTemps().get((currentHour + 1) % 24) + "°F");
+	T2F.setText(weather.getHourlyTemps().get((currentHour + 2) % 24) + "°F");
+	T3F.setText(weather.getHourlyTemps().get((currentHour + 3) % 24) + "°F");
+	T4F.setText(weather.getHourlyTemps().get((currentHour + 4) % 24) + "°F");
+	T5F.setText(weather.getHourlyTemps().get((currentHour + 5) % 24) + "°F");
+	T6F.setText(weather.getHourlyTemps().get((currentHour + 6) % 24) + "°F");
+	T7F.setText(weather.getHourlyTemps().get((currentHour + 7) % 24) + "°F");
 			
 	//fields for hourly temperature Celsius
-	T1C.setText(dFormat.format((Double.parseDouble((weather.getHourlyTemps().get(currentHour+1)).toString())-32)*5/9) + "°C");
-	T2C.setText(dFormat.format((Double.parseDouble((weather.getHourlyTemps().get(currentHour+2)).toString())-32)*5/9) + "°C");
-	T3C.setText(dFormat.format((Double.parseDouble((weather.getHourlyTemps().get(currentHour+3)).toString())-32)*5/9) + "°C");
-	T4C.setText(dFormat.format((Double.parseDouble((weather.getHourlyTemps().get(currentHour+4)).toString())-32)*5/9) + "°C");
-	T5C.setText(dFormat.format((Double.parseDouble((weather.getHourlyTemps().get(currentHour+5)).toString())-32)*5/9) + "°C");
-	T6C.setText(dFormat.format((Double.parseDouble((weather.getHourlyTemps().get(currentHour+6)).toString())-32)*5/9) + "°C");
-	T7C.setText(dFormat.format((Double.parseDouble((weather.getHourlyTemps().get(currentHour+7)).toString())-32)*5/9) + "°C");
+	T1C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get(currentHour + 1))) - 32) * 5 / 9) + "°C");
+	T2C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get(currentHour + 2))) - 32) * 5 / 9) + "°C");
+	T3C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get(currentHour + 3))) - 32) * 5 / 9) + "°C");
+	T4C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get(currentHour + 4))) - 32) * 5 / 9) + "°C");
+	T5C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get(currentHour + 5))) - 32) * 5 / 9) + "°C");
+	T6C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get((currentHour + 6) % 24))) - 32) * 5 / 9) + "°C");
+	T7C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get((currentHour + 7) % 24))) - 32) * 5 / 9) + "°C");
 	
 	//wind speeds hourly 
-	T1W.setText((weather.getHourlyWindSpeeds().get(currentHour+1)) + "MPH");
-	T2W.setText((weather.getHourlyWindSpeeds().get(currentHour+2)) + "MPH");
-	T3W.setText((weather.getHourlyWindSpeeds().get(currentHour+3)) + "MPH");
-	T4W.setText((weather.getHourlyWindSpeeds().get(currentHour+4)) + "MPH");
-	T5W.setText((weather.getHourlyWindSpeeds().get(currentHour+5)) + "MPH");
-	T6W.setText((weather.getHourlyWindSpeeds().get(currentHour+6)) + "MPH");
-	T7W.setText((weather.getHourlyWindSpeeds().get(currentHour+7)) + "MPH");
+	T1W.setText(weather.getHourlyWindSpeeds().get((currentHour + 1) % 24) + "MPH");
+	T2W.setText(weather.getHourlyWindSpeeds().get((currentHour + 2) % 24) + "MPH");
+	T3W.setText(weather.getHourlyWindSpeeds().get((currentHour + 3) % 24) + "MPH");
+	T4W.setText(weather.getHourlyWindSpeeds().get((currentHour + 4) % 24) + "MPH");
+	T5W.setText(weather.getHourlyWindSpeeds().get((currentHour + 5) % 24) + "MPH");
+	T6W.setText(weather.getHourlyWindSpeeds().get((currentHour + 6) % 24) + "MPH");
+	T7W.setText(weather.getHourlyWindSpeeds().get((currentHour + 7) % 24) + "MPH");
 	
 	//precipitation hourly
-	T1P.setText((weather.getHourlyPrecipProbs().get(currentHour+1))+ "%");
-	T2P.setText((weather.getHourlyPrecipProbs().get(currentHour+2))+ "%");
-	T3P.setText((weather.getHourlyPrecipProbs().get(currentHour+3))+ "%");
-	T4P.setText((weather.getHourlyPrecipProbs().get(currentHour+4))+ "%");
-	T5P.setText((weather.getHourlyPrecipProbs().get(currentHour+5))+ "%");
-	T6P.setText((weather.getHourlyPrecipProbs().get(currentHour+6))+ "%");
-	T7P.setText((weather.getHourlyPrecipProbs().get(currentHour+7))+ "%");
+	T1P.setText(weather.getHourlyPrecipProbs().get((currentHour + 1) % 24) + "%");
+	T2P.setText(weather.getHourlyPrecipProbs().get((currentHour + 2) % 24) + "%");
+	T3P.setText(weather.getHourlyPrecipProbs().get((currentHour + 3) % 24) + "%");
+	T4P.setText(weather.getHourlyPrecipProbs().get((currentHour + 4) % 24) + "%");
+	T5P.setText(weather.getHourlyPrecipProbs().get((currentHour + 5) % 24) + "%");
+	T6P.setText(weather.getHourlyPrecipProbs().get((currentHour + 6) % 24) + "%");
+	T7P.setText(weather.getHourlyPrecipProbs().get((currentHour + 7) % 24) + "%");
 }
 	
 	//Handler for button reload
