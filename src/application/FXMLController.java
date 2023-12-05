@@ -128,7 +128,7 @@ public class FXMLController {
 	D4F.setText(weather.getDailyMaxTemps().get(4) + "°F/" + weather.getDailyMinTemps().get(4) + "°F");
 	D5F.setText(weather.getDailyMaxTemps().get(5) + "°F/" + weather.getDailyMinTemps().get(5) + "°F");
 	
-	currentWind.setText("Wind Direction: " + directionToString(weather.getCurrentWindDirection())+" Speed: "+weather.getCurrentWindSpeed()+ " MPH");
+	currentWind.setText("Direction: " + directionToString(weather.getCurrentWindDirection())+" Speed: "+weather.getCurrentWindSpeed()+ " MPH");
 
 	//fields for time for hourly display
 	T11.setText(timeToString((currentHour + 1) % 24));
@@ -206,21 +206,21 @@ public class FXMLController {
 	{
 		var dir = Double.parseDouble(direction.toString());
 		if (dir >= 75 && dir <=105)
-			return "North";
+			return "N";
 		if (dir > 105 && dir < 165)
-			return "North-East";
+			return "NE";
 		if (dir >=165 && dir <= 195)
-			return "East";
+			return "E";
 		if (dir > 195 && dir < 255)
-			return "South-East";
+			return "SE";
 		if (dir >= 255 && dir <= 285)
-			return "South";
+			return "S";
 		if (dir > 285 && dir < 345)
-			return "South-West";
+			return "SW";
 		if ((dir >= 345 && dir <=360) || dir >= 0 && dir <= 15)
-			return "West";
+			return "W";
 		if (dir > 15 && dir < 75)
-			return "North-West";
+			return "NW";
 		else return "Problem designating direction...";
 	}
 	//return string based on AM or PM of time
