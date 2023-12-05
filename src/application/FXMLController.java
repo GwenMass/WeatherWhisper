@@ -173,11 +173,11 @@ public class FXMLController {
 	T7F.setText(weather.getHourlyTemps().get((currentHour + 7) % 24) + "°F");
 			
 	//fields for hourly temperature Celsius
-	T1C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get(currentHour + 1))) - 32) * 5 / 9) + "°C");
-	T2C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get(currentHour + 2))) - 32) * 5 / 9) + "°C");
-	T3C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get(currentHour + 3))) - 32) * 5 / 9) + "°C");
-	T4C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get(currentHour + 4))) - 32) * 5 / 9) + "°C");
-	T5C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get(currentHour + 5))) - 32) * 5 / 9) + "°C");
+	T1C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get((currentHour + 1) % 24))) - 32) * 5 / 9) + "°C");
+	T2C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get((currentHour + 2) % 24))) - 32) * 5 / 9) + "°C");
+	T3C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get((currentHour + 3) % 24))) - 32) * 5 / 9) + "°C");
+	T4C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get((currentHour + 4) % 24))) - 32) * 5 / 9) + "°C");
+	T5C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get((currentHour + 5) % 24))) - 32) * 5 / 9) + "°C");
 	T6C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get((currentHour + 6) % 24))) - 32) * 5 / 9) + "°C");
 	T7C.setText(dFormat.format((Double.parseDouble(String.valueOf(weather.getHourlyTemps().get((currentHour + 7) % 24))) - 32) * 5 / 9) + "°C");
 	
