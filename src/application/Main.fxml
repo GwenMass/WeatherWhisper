@@ -196,7 +196,6 @@
                                  <children>
                                     <Text  fx:id = "T62" layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="T6" />
                                     <Text  fx:id = "T6C" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-                                    <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
