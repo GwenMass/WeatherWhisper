@@ -29,35 +29,35 @@
                      <children>
                         <Text fx:id="D1" layoutX="7.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D1" />
                         <ImageView fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                        <Text fx:id="D1F" layoutX="245.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
+                        <Text fx:id="D1F" layoutX="230.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
                         <Text fx:id="D2" layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D2" />
                         <ImageView fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                        <Text fx:id="D2F" layoutX="245.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
+                        <Text fx:id="D2F" layoutX="230.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
                         <Text fx:id="D3" layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D3" />
                         <ImageView fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                       <Text fx:id="D3F" layoutX="245.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
+                       <Text fx:id="D3F" layoutX="230.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
                         <Text fx:id="D4" layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D4" />
                         <ImageView fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                        <Text fx:id="D4F" layoutX="245.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
+                        <Text fx:id="D4F" layoutX="230.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
                         <Text fx:id="D5" layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D5" />
                         <ImageView fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
-                        <Text fx:id="D5F" layoutX="245.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
+                        <Text fx:id="D5F" layoutX="230.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                </children>
@@ -66,8 +66,8 @@
       </Pane>
       <Pane layoutX="350.0" layoutY="326.0" prefHeight="200.0" prefWidth="200.0" styleClass="roundedPane">
          <children>
-            <Text layoutX="31.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wind Speed and Direction" style="-fx-font-weight: bold;"/>
-            <Text fx:id = "currentWind" layoutX="55.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wind Direction: Speed:" />
+            <Text layoutX="25.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wind Speed and Direction" style="-fx-font-weight: bold;"/>
+            <Text fx:id = "currentWind" layoutX="20.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direction: Speed:" />
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
             	<image>
             		<Image url="@WindDirection.png"/>
