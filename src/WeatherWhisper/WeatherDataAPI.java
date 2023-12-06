@@ -1,5 +1,6 @@
 package WeatherWhisper;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -9,6 +10,7 @@ import org.json.*;
 // Stores all of the Weather Data for a single location
 public class WeatherDataAPI {
 	
+	private String inputLocation;
 	private JSONObject weatherData;
 	private Object address;
 	private Object currentTemp;
@@ -22,16 +24,19 @@ public class WeatherDataAPI {
 	private ArrayList<Object> dailyMinTemps;
 	private ZonedDateTime time;
 
-	// Constructs all relevant weather data contained in given JSON file
+	// Constructor that uses pre-existing JSON data (i.e., API has already been called)
 	public WeatherDataAPI (JSONObject weatherData){
+		
 		this.weatherData = weatherData;
 		
+		// Initialize ArrayList fields
 		hourlyTemps = new ArrayList<Object>();
 		hourlyWindSpeeds = new ArrayList<Object>();
 		hourlyPrecipProbs = new ArrayList<Object>();
 		dailyMaxTemps = new ArrayList<Object>();
 		dailyMinTemps = new ArrayList<Object>();
 		
+		// Extract all desired data from JSONObject
 		setAddress();
 		setCurrentTemp();
 		setCurrentSkyConditions();
@@ -43,6 +48,53 @@ public class WeatherDataAPI {
 		setDailyMaxTemps();
 		setDailyMinTemps();
 		setTime();
+		
+		// inputLocation is used for updateWeatherData(); however, it's not provided as a parameter in this constructor.
+		// So, default it to the resolvedAddress from the JSON (already stored in this.address after setAddress())
+		inputLocation = (String) address;
+	}
+	
+	// Constructor that takes String containing location name (i.e., API has not already been called -> constructor must call API)
+	public WeatherDataAPI (String inputLocation) {
+		
+		this.inputLocation = inputLocation;
+		
+		// Initialize ArrayList fields
+		hourlyTemps = new ArrayList<Object>();
+		hourlyWindSpeeds = new ArrayList<Object>();
+		hourlyPrecipProbs = new ArrayList<Object>();
+		dailyMaxTemps = new ArrayList<Object>();
+		dailyMinTemps = new ArrayList<Object>();
+		
+		// Use API to fetch JSON data and extract desired weather measurements
+		updateWeatherData();
+	}
+	
+	// Re-calls the Visual Crossing API w/ the same inputLocation String to update weather data ... can also be used for initial API call
+	public void updateWeatherData() {
+		try {
+			// Call API with specified location to retrieve JSONObject
+			weatherData = WeatherService.fetchWeatherData(inputLocation);
+				// will need error handling for when a given inputLocation generates Bad API Request
+			
+			// Extract all desired data from JSONObject
+			setAddress();
+			setCurrentTemp();
+			setCurrentSkyConditions();
+			setCurrentWindSpeed();
+			setCurrentWindDirection();
+			setHourlyTemps();
+			setHourlyWindSpeeds();
+			setHourlyPrecipProbs();
+			setDailyMaxTemps();
+			setDailyMinTemps();
+			setTime();
+			
+		} catch (IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	// Set address of city according to resolved address determined by Visual Crossing API
