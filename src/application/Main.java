@@ -17,8 +17,7 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
 			Parent root = loader.load();
 			FXMLController controller = loader.getController();
-			WeatherDataAPI weather = new WeatherDataAPI(WeatherService.fetchWeatherData("Chapel Hill NC"));
-			
+			WeatherDataAPI weather = new WeatherDataAPI(WeatherService.fetchWeatherData("Conway Ar"));
 			controller.initialize(weather);
 			Scene scene = new Scene(root,1000,540);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm()); 
