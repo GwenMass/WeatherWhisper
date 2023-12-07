@@ -35,9 +35,23 @@ public class WeatherService {
 			.method("GET", HttpRequest.BodyPublishers.noBody()).build();
 		HttpResponse response = HttpClient.newHttpClient()
 			.send(request, HttpResponse.BodyHandlers.ofString());
+		String responseText = (String) response.body();
 		
-		// Return results as a JSONObject
-		JSONObject weatherData = new JSONObject((String) response.body());
+		//Return results as a JSONObject
+		JSONObject weatherData;
+		
+		// Create a validAddress key based on whether input location generated Bad API Request or not
+		if(responseText.equals("Bad API Request:Invalid location parameter value.")) {
+			weatherData = new JSONObject();
+			weatherData.put("validAddress", false);
+		}
+		else {
+			weatherData = new JSONObject(responseText);
+			weatherData.put("validAddress", true);
+		}
+		
 		return weatherData;
+		
 	}
+	
 }

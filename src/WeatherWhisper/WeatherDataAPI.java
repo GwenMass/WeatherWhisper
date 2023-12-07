@@ -12,6 +12,7 @@ public class WeatherDataAPI {
 	
 	private String inputLocation;
 	private JSONObject weatherData;
+	private Boolean validAddress;
 	private Object address;
 	private Object currentTemp;
 	private Object currentSkyConditions;
@@ -36,18 +37,21 @@ public class WeatherDataAPI {
 		dailyMaxTemps = new ArrayList<Object>();
 		dailyMinTemps = new ArrayList<Object>();
 		
-		// Extract all desired data from JSONObject
-		setAddress();
-		setCurrentTemp();
-		setCurrentSkyConditions();
-		setCurrentWindSpeed();
-		setCurrentWindDirection();
-		setHourlyTemps();
-		setHourlyWindSpeeds();
-		setHourlyPrecipProbs();
-		setDailyMaxTemps();
-		setDailyMinTemps();
-		setTime();
+		// Extract all desired data from JSONObject, as long as the address was valid
+		setValidity();
+		if(isValid()) {
+			setAddress();
+			setCurrentTemp();
+			setCurrentSkyConditions();
+			setCurrentWindSpeed();
+			setCurrentWindDirection();
+			setHourlyTemps();
+			setHourlyWindSpeeds();
+			setHourlyPrecipProbs();
+			setDailyMaxTemps();
+			setDailyMinTemps();
+			setTime();
+		}
 		
 		// inputLocation is used for updateWeatherData(); however, it's not provided as a parameter in this constructor.
 		// So, default it to the resolvedAddress from the JSON (already stored in this.address after setAddress())
@@ -78,23 +82,34 @@ public class WeatherDataAPI {
 				// will need error handling for when a given inputLocation generates Bad API Request
 			
 			// Extract all desired data from JSONObject
-			setAddress();
-			setCurrentTemp();
-			setCurrentSkyConditions();
-			setCurrentWindSpeed();
-			setCurrentWindDirection();
-			setHourlyTemps();
-			setHourlyWindSpeeds();
-			setHourlyPrecipProbs();
-			setDailyMaxTemps();
-			setDailyMinTemps();
-			setTime();
+			setValidity();
+			if(isValid()) {
+				setAddress();
+				setCurrentTemp();
+				setCurrentSkyConditions();
+				setCurrentWindSpeed();
+				setCurrentWindDirection();
+				setHourlyTemps();
+				setHourlyWindSpeeds();
+				setHourlyPrecipProbs();
+				setDailyMaxTemps();
+				setDailyMinTemps();
+				setTime();
+			}
 			
 		} catch (IOException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void setValidity() {
+		validAddress = (Boolean) weatherData.get("validAddress");
+	}
+	
+	public Boolean isValid() {
+		return validAddress;
 	}
 	
 	// Set address of city according to resolved address determined by Visual Crossing API
