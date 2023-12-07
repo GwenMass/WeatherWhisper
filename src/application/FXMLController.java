@@ -53,7 +53,7 @@ public class FXMLController {
 	iterator = 1;
 	for (Text text : hour)
 	{
-		text.setText(timeToString((currentHour + iterator++) % 12));
+		text.setText(timeToString((currentHour + iterator++) % 24));
 	}
 	
 	//initialize tags for daily temperature bounds
