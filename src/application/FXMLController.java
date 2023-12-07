@@ -101,21 +101,21 @@ public class FXMLController {
 	{
 		var dir = Double.parseDouble(direction.toString());
 		if (dir >= 75 && dir <=105)
-			return "East";
+			return "E";
 		if (dir > 105 && dir < 165)
-			return "South-East";
+			return "SE";
 		if (dir >=165 && dir <= 195)
-			return "South";
+			return "S";
 		if (dir > 195 && dir < 255)
-			return "South-West";
+			return "SW";
 		if (dir >= 255 && dir <= 285)
-			return "West";
+			return "W";
 		if (dir > 285 && dir < 345)
-			return "North-West";
+			return "NW";
 		if ((dir >= 345 && dir <=360) || dir >= 0 && dir <= 15)
-			return "North";
+			return "N";
 		if (dir > 15 && dir < 75)
-			return "North-East";
+			return "NE";
 		else return "Problem designating direction...";
 	}
 	//return string based on AM or PM of time
