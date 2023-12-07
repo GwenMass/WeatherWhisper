@@ -357,9 +357,9 @@
                 	<Insets top="15.0" />
             	</padding>
         	</Label>
-        	<Text fx:id ="currentBound" styleClass="anchorLabel" text="Degrees" style="-fx-font-size: 20px"></Text>
+        	<Text fx:id ="currentTemp" styleClass="anchorLabel" text="Degrees" style="-fx-font-size: 20px"></Text>
         	<Label fx:id ="weatherDesc" styleClass="anchorLabel" text="Weather Type"></Label>
-        	<Label fx:id ="currentBounds" styleClass="anchorLabel" text="H: L:"></Label>
+        	<Text fx:id ="currentBound" styleClass="anchorLabel" text="H: L:"></Text>
     	</children>
    	</VBox>
    </children>
@@ -400,6 +400,7 @@
 	      	</ArrayList>
 	     
 	      	<ArrayList fx:id = "hourFarenheit">
+	      		<fx:reference source = "currentTemp"/>
 	      		<fx:reference source="hour1Farenheit"/>
 	      		<fx:reference source="hour2Farenheit"/>
 	      		<fx:reference source="hour3Farenheit"/>

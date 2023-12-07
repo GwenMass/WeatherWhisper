@@ -73,7 +73,7 @@ public class FXMLController {
 	}
 	
 	//initialize tags for hourly temperatures in Farenheit
-	iterator = 1;
+	iterator = 0;
 	for (Text text : hourFarenheit)
 	{
 		text.setText(weather.getHourlyTemps().get((currentHour + iterator++) % 24) + "°F");
@@ -139,11 +139,13 @@ public class FXMLController {
 		}
 		else return time + "AM";
 	}
+	
 	private String toCelsius(Object farenheit)
 	{
 		DecimalFormat dFormat = new DecimalFormat("#.#");
 		return (dFormat.format((Double.parseDouble(farenheit.toString())-32)*5/9))+"°C";
 	}
+	
 	private void searchHandler(ActionEvent e)
 	{
 		String loc = searchBox.getText();
@@ -152,4 +154,5 @@ public class FXMLController {
 		
 		initialize(searchLoc);
 	}
+	
 }
