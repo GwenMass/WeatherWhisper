@@ -2,7 +2,9 @@ package application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
-
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,6 +12,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import WeatherWhisper.WeatherDataAPI;
+import WeatherWhisper.WeatherService;
+
 public class FXMLController {
 		
 		private LocalDate date = LocalDate.now();
@@ -24,6 +28,8 @@ public class FXMLController {
 		@FXML Label address;
 		@FXML Label weatherDesc;
 		@FXML Text compassText;
+		@FXML TextField searchBox;
+		@FXML Button searchButton;
 	//initializes values with placeholders for startup
 @FXML private void startup()
 {
@@ -32,6 +38,8 @@ public class FXMLController {
 	//read data from the provided weather api pull
 @FXML public void initialize(WeatherDataAPI weather) 
 {
+	searchButton.setOnAction(this::searchHandler);
+	
 	int iterator = 1;
 	int currentHour = LocalTime.now().getHour();
 
@@ -135,5 +143,13 @@ public class FXMLController {
 	{
 		DecimalFormat dFormat = new DecimalFormat("#.#");
 		return (dFormat.format((Double.parseDouble(farenheit.toString())-32)*5/9))+"°C";
+	}
+	private void searchHandler(ActionEvent e)
+	{
+		String loc = searchBox.getText();
+		WeatherDataAPI searchLoc = new WeatherDataAPI(loc);
+		searchLoc.updateWeatherData();
+		
+		initialize(searchLoc);
 	}
 }
