@@ -400,7 +400,6 @@
 	      	</ArrayList>
 	     
 	      	<ArrayList fx:id = "hourFahrenheit">
-	      		<fx:reference source = "currentTemp"/>
 	      		<fx:reference source="hour1Fahrenheit"/>
 	      		<fx:reference source="hour2Fahrenheit"/>
 	      		<fx:reference source="hour3Fahrenheit"/>

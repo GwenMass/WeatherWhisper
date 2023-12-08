@@ -7,17 +7,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import java.text.DecimalFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
+import java.time.ZonedDateTime;
 import WeatherWhisper.WeatherDataAPI;
-import WeatherWhisper.WeatherService;
 
 public class FXMLController {
 		
-	private LocalDate date = LocalDate.now();
 	//tags for injection
 	@FXML ArrayList<Text> dayLabel;
 	@FXML ArrayList<Text> hour;
@@ -27,6 +23,7 @@ public class FXMLController {
 	@FXML ArrayList<Text> hourWind;
 	@FXML ArrayList<Text> hourPrecip;
 	@FXML Label address;
+	@FXML Text currentTemp;
 	@FXML Label weatherDesc;
 	@FXML Text compassText;
 	@FXML TextField searchBox;
@@ -43,11 +40,13 @@ public class FXMLController {
 	{
 		searchButton.setOnAction(this::searchHandler);
 		
-		int iterator = 1;
+		ZonedDateTime date = weather.getTime();
 		int currentHour = weather.getHour();
+		int iterator = 1;
 	
 		//initialize tags for header info
 		address.setText(weather.getAddress().toString());
+		currentTemp.setText(weather.getCurrentTemp().toString() + "°F");
 		weatherDesc.setText(weather.getCurrentSkyConditions().toString());
 		
 		//initialize tag for compass info
