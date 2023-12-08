@@ -156,7 +156,10 @@ public class FXMLController {
 		WeatherDataAPI searchLoc = new WeatherDataAPI(loc);
 		//searchLoc.updateWeatherData();	//unnecessary I think, as updateWeatherData() is called inside WeatherDataAPI constructor anyways
 		
-		initialize(searchLoc);
+		// Only initialize location searched by user if API recognized location and returned valid JSON
+		if(searchLoc.isValid())
+			initialize(searchLoc);
+		// else indicate invalid location to user somehow perhaps?
 	}
 	
 }
