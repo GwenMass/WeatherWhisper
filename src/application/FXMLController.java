@@ -57,7 +57,8 @@ public class FXMLController {
 		for (Text text : dayLabel)
 		{
 			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd");
-			text.setText(dateFormat.format(date.plusDays(iterator++)));
+			text.setText(date.plusDays(iterator).getDayOfWeek() + " " + dateFormat.format(date.plusDays(iterator)));
+			iterator++;
 		}
 		
 		//initialize tags for hours 
