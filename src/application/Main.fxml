@@ -99,49 +99,49 @@
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour1.text}"/>
-                                    <Text fx:id = "hour1Farenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "hour1Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour2.text}" />
-                                    <Text fx:id = "hour2Farenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "hour2Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour3.text}" />
-                                    <Text fx:id = "hour3Farenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "hour3Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour4.text}" />
-                                    <Text fx:id = "hour4Farenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "hour4Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour5.text}" />
-                                    <Text fx:id = "hour5Farenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "hour5Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour6.text}" />
-                                    <Text fx:id = "hour6Farenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "hour6Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour7.text}" />
-                                    <Text fx:id = "hour7Farenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
+                                    <Text fx:id = "hour7Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
                                     <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
@@ -399,15 +399,15 @@
 	     		<fx:reference source ="day5Bound"/>
 	      	</ArrayList>
 	     
-	      	<ArrayList fx:id = "hourFarenheit">
+	      	<ArrayList fx:id = "hourFahrenheit">
 	      		<fx:reference source = "currentTemp"/>
-	      		<fx:reference source="hour1Farenheit"/>
-	      		<fx:reference source="hour2Farenheit"/>
-	      		<fx:reference source="hour3Farenheit"/>
-	      		<fx:reference source="hour4Farenheit"/>
-	      		<fx:reference source="hour5Farenheit"/>
-	      		<fx:reference source="hour6Farenheit"/>
-	      		<fx:reference source="hour7Farenheit"/>
+	      		<fx:reference source="hour1Fahrenheit"/>
+	      		<fx:reference source="hour2Fahrenheit"/>
+	      		<fx:reference source="hour3Fahrenheit"/>
+	      		<fx:reference source="hour4Fahrenheit"/>
+	      		<fx:reference source="hour5Fahrenheit"/>
+	      		<fx:reference source="hour6Fahrenheit"/>
+	      		<fx:reference source="hour7Fahrenheit"/>
 	   		</ArrayList>
 	     
 	      	<ArrayList fx:id = "hourCelsius">

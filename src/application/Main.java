@@ -1,7 +1,6 @@
 package application;
 	
 import WeatherWhisper.WeatherDataAPI;
-import WeatherWhisper.WeatherService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -17,7 +16,7 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Main.fxml"));
 			Parent root = loader.load();
 			FXMLController controller = loader.getController();
-			WeatherDataAPI weather = new WeatherDataAPI(WeatherService.fetchWeatherData("Conway Ar"));
+			WeatherDataAPI weather = new WeatherDataAPI("Conway Ar");
 			controller.initialize(weather);
 			Scene scene = new Scene(root,1000,540);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm()); 
