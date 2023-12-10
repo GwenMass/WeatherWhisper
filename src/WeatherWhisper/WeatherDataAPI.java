@@ -26,6 +26,7 @@ public class WeatherDataAPI {
 	private ArrayList<Object> hourlyWindSpeeds;
 	private ArrayList<Object> hourlyPrecipProbs;
 	private ArrayList<Object> hourlyHumidities;
+	private ArrayList<Object> hourlySkyConditions;
 	private ArrayList<Object> dailyMaxTemps;
 	private ArrayList<Object> dailyMinTemps;
 
@@ -39,6 +40,7 @@ public class WeatherDataAPI {
 		hourlyWindSpeeds = new ArrayList<Object>();
 		hourlyPrecipProbs = new ArrayList<Object>();
 		hourlyHumidities = new ArrayList<Object>();
+		hourlySkyConditions = new ArrayList<Object>();
 		dailyMaxTemps = new ArrayList<Object>();
 		dailyMinTemps = new ArrayList<Object>();
 		
@@ -58,6 +60,7 @@ public class WeatherDataAPI {
 			setHourlyWindSpeeds();
 			setHourlyPrecipProbs();
 			setHourlyHumidities();
+			setHourlySkyConditions();
 			setDailyMaxTemps();
 			setDailyMinTemps();
 		}
@@ -77,6 +80,7 @@ public class WeatherDataAPI {
 		hourlyWindSpeeds = new ArrayList<Object>();
 		hourlyPrecipProbs = new ArrayList<Object>();
 		hourlyHumidities = new ArrayList<Object>();
+		hourlySkyConditions = new ArrayList<Object>();
 		dailyMaxTemps = new ArrayList<Object>();
 		dailyMinTemps = new ArrayList<Object>();
 		
@@ -106,6 +110,7 @@ public class WeatherDataAPI {
 				setHourlyWindSpeeds();
 				setHourlyPrecipProbs();
 				setHourlyHumidities();
+				setHourlySkyConditions();
 				setDailyMaxTemps();
 				setDailyMinTemps();
 			}
@@ -326,6 +331,25 @@ public class WeatherDataAPI {
 	
 	public ArrayList<Object> getHourlyHumidities(){
 		return hourlyHumidities;
+	}
+	
+	private void setHourlySkyConditions() {
+		hourlySkyConditions.clear();
+		
+		// Starting at currentHour + 1, append today's remaining hourly humidities (i.e., until !(hour < 24))
+		int currentHour = getHour();
+		for(int hour = currentHour + 1; hour < 24; hour++) {
+			hourlySkyConditions.add(weatherData.getJSONArray("days").getJSONObject(0).getJSONArray("hours").getJSONObject(hour).get("conditions"));
+		}
+								
+		// Starting at hour 0 (i.e. midnight), append tomorrow's hourly humidities until 24 total hourlyHumidities have been stored
+		for(int hour = 0; hour <= currentHour; hour++) {
+			hourlySkyConditions.add(weatherData.getJSONArray("days").getJSONObject(1).getJSONArray("hours").getJSONObject(hour).get("conditions"));
+		}
+	}
+	
+	public ArrayList<Object> getHourlySkyConditions(){
+		return hourlySkyConditions;
 	}
 	
 	// For each JSONObject in the "days" JSONArray (i.e., for each day), 
