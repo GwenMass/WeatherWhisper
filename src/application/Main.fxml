@@ -76,6 +76,9 @@
             		<Image url="@WindDirection.png"/>
         		</image>
     		</ImageView>
+    		<ImageView fx:id="dynamicArrow" fitWidth="200.0" fitHeight="200">
+            	<Image url="@compassArrow.png"/>
+            	</ImageView>
          </children>
       </Pane>
       <Pane layoutX="607.0" layoutY="201.0" prefHeight="325.0" prefWidth="373.0" styleClass="roundedPane">
