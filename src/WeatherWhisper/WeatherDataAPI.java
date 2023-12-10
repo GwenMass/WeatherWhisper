@@ -29,6 +29,7 @@ public class WeatherDataAPI {
 	private ArrayList<Object> hourlySkyConditions;
 	private ArrayList<Object> dailyMaxTemps;
 	private ArrayList<Object> dailyMinTemps;
+	private ArrayList<Object> dailySkyConditions;
 
 	// Constructor that uses pre-existing JSON data (i.e., API has already been called)
 	public WeatherDataAPI (JSONObject weatherData){
@@ -43,6 +44,7 @@ public class WeatherDataAPI {
 		hourlySkyConditions = new ArrayList<Object>();
 		dailyMaxTemps = new ArrayList<Object>();
 		dailyMinTemps = new ArrayList<Object>();
+		dailySkyConditions = new ArrayList<Object>();
 		
 		// Extract all desired data from JSONObject, as long as the address was valid
 		setValidity();
@@ -63,6 +65,7 @@ public class WeatherDataAPI {
 			setHourlySkyConditions();
 			setDailyMaxTemps();
 			setDailyMinTemps();
+			setDailySkyConditions();
 		}
 		
 		// inputLocation is used for updateWeatherData(); however, it's not provided as a parameter in this constructor.
@@ -83,6 +86,7 @@ public class WeatherDataAPI {
 		hourlySkyConditions = new ArrayList<Object>();
 		dailyMaxTemps = new ArrayList<Object>();
 		dailyMinTemps = new ArrayList<Object>();
+		dailySkyConditions = new ArrayList<Object>();
 		
 		// Use API to fetch JSON data and extract desired weather measurements
 		updateWeatherData();
@@ -113,6 +117,7 @@ public class WeatherDataAPI {
 				setHourlySkyConditions();
 				setDailyMaxTemps();
 				setDailyMinTemps();
+				setDailySkyConditions();
 			}
 			
 		} catch (IOException | InterruptedException e) {
@@ -314,6 +319,8 @@ public class WeatherDataAPI {
 		return hourlyPrecipProbs;
 	}
 	
+	// [Same implementation as previous hourly setters]
+	// Index 0 of hourlyHumidities represents the next hour (i.e., the humidity at 5pm if it is 4:12pm)
 	private void setHourlyHumidities() {
 		hourlyHumidities.clear();
 		
@@ -333,6 +340,8 @@ public class WeatherDataAPI {
 		return hourlyHumidities;
 	}
 	
+	// [Same implementation as previous hourly setters]
+	// Index 0 of hourlySkyConditions represents the next hour (i.e., the sky conditions at 5pm if it is 4:12pm)
 	private void setHourlySkyConditions() {
 		hourlySkyConditions.clear();
 		
@@ -378,6 +387,20 @@ public class WeatherDataAPI {
 	
 	public ArrayList<Object> getDailyMinTemps() {
 		return dailyMinTemps;
+	}
+	
+	// For each JSONObject in the "days" JSONArray (i.e., for each day), 
+	// appends the value in the "conditions" field to our ArrayList of dailySkyConditions. Index 0 is today's sky conditions.
+	private void setDailySkyConditions() {
+		dailySkyConditions.clear();
+		
+		for(int day = 0; day < 15; day++) {
+			dailySkyConditions.add(weatherData.getJSONArray("days").getJSONObject(day).get("conditions"));
+		}
+	}
+	
+	public ArrayList<Object> getDailySkyConditions(){
+		return dailySkyConditions;
 	}
 	
 }
