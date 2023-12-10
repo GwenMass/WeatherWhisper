@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import java.text.DecimalFormat;
@@ -35,7 +37,8 @@ public class FXMLController {
 	@FXML Button searchButton;
 	@FXML Button hourLeft;
 	@FXML Button hourRight;
-		
+	@FXML Image compassArrow = new Image(getClass().getResourceAsStream("compassArrow.png"));
+	@FXML ImageView dynamicArrow = new ImageView(compassArrow);
 	// Initializes values with placeholders for startup
 	@FXML private void startup() 
 	{
@@ -49,7 +52,7 @@ public class FXMLController {
 		date = calledWeather.getTime();
 		currentHour = calledWeather.getHour();
 		viewHour = currentHour;
-		
+
 		//set actions to buttons 
 		searchButton.setOnAction(this::searchHandler);
 		searchBox.setOnMouseClicked(this::searchTextHandler);
@@ -63,7 +66,7 @@ public class FXMLController {
 		
 		//initialize tag for compass info
 		compassText.setText("Wind Direction: " + directionToString(weather.getCurrentWindDirection()) + " Speed: " + weather.getCurrentWindSpeed() + " MPH");
-		
+		dynamicArrow.setRotate(Double.parseDouble((weather.getCurrentWindDirection()).toString()));
 		//place dates into ArrayList
 		initializeDates();
 
@@ -90,7 +93,10 @@ public class FXMLController {
 	{
 		var dir = Double.parseDouble(direction.toString());
 		if (dir >= 75 && dir <=105)
+		{
 			return "E";
+		}
+			
 		if (dir > 105 && dir < 165)
 			return "SE";
 		if (dir >=165 && dir <= 195)
