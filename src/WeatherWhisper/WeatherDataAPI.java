@@ -14,14 +14,18 @@ public class WeatherDataAPI {
 	private JSONObject weatherData;
 	private Boolean validAddress;
 	private Object address;
-	private ZonedDateTime time;
+	private ZonedDateTime currentTime;
+	private ZonedDateTime sunriseTime;
+	private ZonedDateTime sunsetTime;
 	private Object currentTemp;
 	private Object currentSkyConditions;
 	private Object currentWindSpeed;
 	private Object currentWindDirection;
+	private Object currentUVindex;
 	private ArrayList<Object> hourlyTemps;
 	private ArrayList<Object> hourlyWindSpeeds;
 	private ArrayList<Object> hourlyPrecipProbs;
+	private ArrayList<Object> hourlyHumidities;
 	private ArrayList<Object> dailyMaxTemps;
 	private ArrayList<Object> dailyMinTemps;
 
@@ -34,6 +38,7 @@ public class WeatherDataAPI {
 		hourlyTemps = new ArrayList<Object>();
 		hourlyWindSpeeds = new ArrayList<Object>();
 		hourlyPrecipProbs = new ArrayList<Object>();
+		hourlyHumidities = new ArrayList<Object>();
 		dailyMaxTemps = new ArrayList<Object>();
 		dailyMinTemps = new ArrayList<Object>();
 		
@@ -42,13 +47,17 @@ public class WeatherDataAPI {
 		if(isValid()) {
 			setAddress();
 			setTime();
+			setSunriseTime();
+			setSunsetTime();
 			setCurrentTemp();
 			setCurrentSkyConditions();
 			setCurrentWindSpeed();
 			setCurrentWindDirection();
+			setCurrentUVindex();
 			setHourlyTemps();
 			setHourlyWindSpeeds();
 			setHourlyPrecipProbs();
+			setHourlyHumidities();
 			setDailyMaxTemps();
 			setDailyMinTemps();
 		}
@@ -67,6 +76,7 @@ public class WeatherDataAPI {
 		hourlyTemps = new ArrayList<Object>();
 		hourlyWindSpeeds = new ArrayList<Object>();
 		hourlyPrecipProbs = new ArrayList<Object>();
+		hourlyHumidities = new ArrayList<Object>();
 		dailyMaxTemps = new ArrayList<Object>();
 		dailyMinTemps = new ArrayList<Object>();
 		
@@ -85,13 +95,17 @@ public class WeatherDataAPI {
 			if(isValid()) {
 				setAddress();
 				setTime();
+				setSunriseTime();
+				setSunsetTime();
 				setCurrentTemp();
 				setCurrentSkyConditions();
 				setCurrentWindSpeed();
 				setCurrentWindDirection();
+				setCurrentUVindex();
 				setHourlyTemps();
 				setHourlyWindSpeeds();
 				setHourlyPrecipProbs();
+				setHourlyHumidities();
 				setDailyMaxTemps();
 				setDailyMinTemps();
 			}
@@ -139,15 +153,47 @@ public class WeatherDataAPI {
 		ZonedDateTime currentZonedDateTime = ZonedDateTime.of(systemTime, systemZone);
 		ZonedDateTime locationZonedDateTime = currentZonedDateTime.withZoneSameInstant(locationZone);
 		
-		time = locationZonedDateTime;
+		currentTime = locationZonedDateTime;
 	}
 	
 	public ZonedDateTime getTime() {
-		return time;
+		return currentTime;
 	}
 	
 	public int getHour() {
-		return time.getHour();
+		return currentTime.getHour();
+	}
+	
+	private void setSunriseTime() {
+		String locTimeZone = (String) weatherData.get("timezone");
+		
+		// Create/format string containing all time/date info for the sunrise
+		String sunriseStr = (String) weatherData.getJSONArray("days").getJSONObject(0).get("datetime");
+		sunriseStr += "T" + (String) weatherData.getJSONObject("currentConditions").getString("sunrise");
+		sunriseStr += ZoneId.of(locTimeZone).getRules().getOffset(LocalDateTime.now());
+		sunriseStr += "[" + locTimeZone + "]";
+		
+		// Set sunriseTime by parsing sunriseStr
+		sunriseTime = ZonedDateTime.parse(sunriseStr);
+	}
+	
+	public ZonedDateTime getSunriseTime() {
+		return sunriseTime;
+	}
+	
+	private void setSunsetTime() {
+		String locTimeZone = (String) weatherData.get("timezone");
+		
+		String sunsetStr = (String) weatherData.getJSONArray("days").getJSONObject(0).get("datetime");
+		sunsetStr += "T" + (String) weatherData.getJSONObject("currentConditions").getString("sunset");
+		sunsetStr += ZoneId.of(locTimeZone).getRules().getOffset(LocalDateTime.now());
+		sunsetStr += "[" + locTimeZone + "]";
+		
+		sunsetTime = ZonedDateTime.parse(sunsetStr);
+	}
+	
+	public ZonedDateTime getSunsetTime() {
+		return sunsetTime;
 	}
 	
 	// Sets currentTemp based on "temp" field of the "currentConditions" JSONObject
@@ -184,6 +230,14 @@ public class WeatherDataAPI {
 	
 	public Object getCurrentWindDirection() {
 		return currentWindDirection;
+	}
+	
+	private void setCurrentUVindex() {
+		currentUVindex = weatherData.getJSONObject("currentConditions").get("uvindex");
+	}
+	
+	public Object getCurrentUVindex() {
+		return currentUVindex;
 	}
 	
 	// Starting at (currentHour + 1) of day 0 (today), for the next 24 JSONObjects that appear in the "hours" JSONArrays of the first two
@@ -253,6 +307,25 @@ public class WeatherDataAPI {
 	
 	public ArrayList<Object> getHourlyPrecipProbs() {
 		return hourlyPrecipProbs;
+	}
+	
+	private void setHourlyHumidities() {
+		hourlyHumidities.clear();
+		
+		// Starting at currentHour + 1, append today's remaining hourly humidities (i.e., until !(hour < 24))
+		int currentHour = getHour();
+		for(int hour = currentHour + 1; hour < 24; hour++) {
+			hourlyHumidities.add(weatherData.getJSONArray("days").getJSONObject(0).getJSONArray("hours").getJSONObject(hour).get("humidity"));
+		}
+						
+		// Starting at hour 0 (i.e. midnight), append tomorrow's hourly humidities until 24 total hourlyHumidities have been stored
+		for(int hour = 0; hour <= currentHour; hour++) {
+			hourlyHumidities.add(weatherData.getJSONArray("days").getJSONObject(1).getJSONArray("hours").getJSONObject(hour).get("humidity"));
+		}
+	}
+	
+	public ArrayList<Object> getHourlyHumidities(){
+		return hourlyHumidities;
 	}
 	
 	// For each JSONObject in the "days" JSONArray (i.e., for each day), 
