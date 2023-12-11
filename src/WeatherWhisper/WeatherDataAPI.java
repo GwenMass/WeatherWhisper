@@ -7,13 +7,13 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import org.json.*;
 
-// Stores all of the Weather Data for a single location
+// Stores all of the Weather Data (used in the WeatherWhisper application) for a single location
 public class WeatherDataAPI {
 	
 	private String inputLocation;
-	private JSONObject weatherData;
+	private JSONObject weatherDataJSON;
 	private Boolean validAddress;
-	private Object address;
+	private Object resolvedAddress;
 	private ZonedDateTime currentTime;
 	private ZonedDateTime sunriseTime;
 	private ZonedDateTime sunsetTime;
@@ -23,55 +23,13 @@ public class WeatherDataAPI {
 	private Object currentWindDirection;
 	private Object currentUVindex;
 	private ArrayList<Object> hourlyTemps;
+	private ArrayList<Object> hourlySkyConditions;
 	private ArrayList<Object> hourlyWindSpeeds;
 	private ArrayList<Object> hourlyPrecipProbs;
 	private ArrayList<Object> hourlyHumidities;
-	private ArrayList<Object> hourlySkyConditions;
 	private ArrayList<Object> dailyMaxTemps;
 	private ArrayList<Object> dailyMinTemps;
 	private ArrayList<Object> dailySkyConditions;
-
-	// Constructor that uses pre-existing JSON data (i.e., API has already been called)
-	public WeatherDataAPI (JSONObject weatherData){
-		
-		this.weatherData = weatherData;
-		
-		// Initialize ArrayList fields
-		hourlyTemps = new ArrayList<Object>();
-		hourlyWindSpeeds = new ArrayList<Object>();
-		hourlyPrecipProbs = new ArrayList<Object>();
-		hourlyHumidities = new ArrayList<Object>();
-		hourlySkyConditions = new ArrayList<Object>();
-		dailyMaxTemps = new ArrayList<Object>();
-		dailyMinTemps = new ArrayList<Object>();
-		dailySkyConditions = new ArrayList<Object>();
-		
-		// Extract all desired data from JSONObject, as long as the address was valid
-		setValidity();
-		if(isValid()) {
-			setAddress();
-			setTime();
-			setSunriseTime();
-			setSunsetTime();
-			setCurrentTemp();
-			setCurrentSkyConditions();
-			setCurrentWindSpeed();
-			setCurrentWindDirection();
-			setCurrentUVindex();
-			setHourlyTemps();
-			setHourlyWindSpeeds();
-			setHourlyPrecipProbs();
-			setHourlyHumidities();
-			setHourlySkyConditions();
-			setDailyMaxTemps();
-			setDailyMinTemps();
-			setDailySkyConditions();
-		}
-		
-		// inputLocation is used for updateWeatherData(); however, it's not provided as a parameter in this constructor.
-		// So, default it to the resolvedAddress from the JSON (already stored in this.address after setAddress())
-		inputLocation = (String) address;
-	}
 	
 	// Constructor that takes String containing location name (i.e., API has not already been called -> constructor must call API)
 	public WeatherDataAPI (String inputLocation) {
@@ -88,21 +46,21 @@ public class WeatherDataAPI {
 		dailyMinTemps = new ArrayList<Object>();
 		dailySkyConditions = new ArrayList<Object>();
 		
-		// Use API to fetch JSON data and extract desired weather measurements
+		// Make initial API call to fetch latest JSON weather data and extract desired weather measurements
 		updateWeatherData();
 	}
 	
-	// Re-calls the Visual Crossing API w/ the same inputLocation String to update weather data ... can also be used for initial API call
+	// Re-calls the Visual Crossing API w/ the same inputLocation String to update weather data (can also be used for initial API call)
 	public void updateWeatherData() {
 		try {
-			// Call API with specified location to retrieve JSONObject
-			weatherData = WeatherService.fetchWeatherData(inputLocation);
+			// Retrieve new JSONObject by calling API with original input for location
+			weatherDataJSON = WeatherService.fetchWeatherData(inputLocation);
 			
 			// Extract all desired data from JSONObject
 			setValidity();
 			if(isValid()) {
-				setAddress();
-				setTime();
+				setResolvedAddress();
+				setCurrentTime();
 				setSunriseTime();
 				setSunsetTime();
 				setCurrentTemp();
@@ -111,10 +69,10 @@ public class WeatherDataAPI {
 				setCurrentWindDirection();
 				setCurrentUVindex();
 				setHourlyTemps();
+				setHourlySkyConditions();
 				setHourlyWindSpeeds();
 				setHourlyPrecipProbs();
 				setHourlyHumidities();
-				setHourlySkyConditions();
 				setDailyMaxTemps();
 				setDailyMinTemps();
 				setDailySkyConditions();
@@ -127,45 +85,40 @@ public class WeatherDataAPI {
 		
 	}
 	
-	// Determine if JSONObject represents valid location (i.e., that the API request wasn't bad) based on "validAddress" field of JSONObject
+	// Determine if JSONObject represents valid location (i.e., that the API request wasn't bad) based on value at "validAddress" key
+	// Note: validAddress is a key we create in WeatherService.java and is not in the original JSON sent by the Visual Crossing API
 	private void setValidity() {
-		validAddress = (Boolean) weatherData.get("validAddress");
+		validAddress = (Boolean) weatherDataJSON.get("validAddress");
 	}
 	
 	public Boolean isValid() {
 		return validAddress;
 	}
 	
-	// Set address of city according to resolved address determined by Visual Crossing API
-	// (e.g., "Conway,,,,, Arkansas" resolves to "Conway, AR, United States" by API itself
-	private void setAddress() {
-		address = weatherData.get("resolvedAddress");
+	// Store resolvedAddress determined by Visual Crossing API (e.g., API itself resolves "Conway,,, Arkansas" to "Conway, AR, United States")
+	private void setResolvedAddress() {
+		resolvedAddress = weatherDataJSON.get("resolvedAddress");
 	}
 	
 	public Object getAddress() {
-		return address;
+		return resolvedAddress;
 	}
 	
-	// Determines the local time of the city whose weather is being stored by converting our system time to the city's local time via
-	// timezones. We ignore the "datetime" and "datetimeEpoch" JSON variables because they only update in intervals of 15 minutes while 
-	// also not always showing the most recent 15-minute marker (likely due to the free pricing plan of the Visual Crossing API), which
-	// can be problematic if the city's time is 3:08pm and the JSON is storing 2:45pm, for example.
-	private void setTime() {
-		// Determine weather-location's time zone
-		String locationTimeZone = (String) weatherData.get("timezone");
-		ZoneId locationZone = ZoneId.of(locationTimeZone);
+	// Stores the datetime at the resolvedAddress by converting from the system time to the address' time via timezones. We do not use
+	// time values provided by API because they are only precise to 15 minutes (and are not even accurate in that regard; it could be 
+	// 3:08pm and the latest JSON might still store 2:45pm, for example).
+	private void setCurrentTime() {
+		// Determine the timezone for the resolvedAddress location
+		ZoneId locationZone = ZoneId.of(weatherDataJSON.get("timezone").toString());
 		
-		// Determine system's time zone
+		// Determine system's local time and timezone
 		LocalDateTime systemTime = LocalDateTime.now();
 		ZoneId systemZone = ZoneId.systemDefault();
 		
-		// Convert system's local time to weather-location's local time
-		ZonedDateTime currentZonedDateTime = ZonedDateTime.of(systemTime, systemZone);
-		ZonedDateTime locationZonedDateTime = currentZonedDateTime.withZoneSameInstant(locationZone);
-		
-		currentTime = locationZonedDateTime;
+		// Knowing both location's timezones, convert the system's local time to the resolvedAddress' local time
+		currentTime = ZonedDateTime.of(systemTime, systemZone).withZoneSameInstant(locationZone);
 	}
-	
+
 	public ZonedDateTime getTime() {
 		return currentTime;
 	}
@@ -174,232 +127,189 @@ public class WeatherDataAPI {
 		return currentTime.getHour();
 	}
 	
+	// For either a sunrise or a sunset (specified by keyInJSON), generates a ZonedDateTime object for the time of that twilight at the location.
+	// Used as a helper function to standardize sunSunriseTime() and setSunSetTime() -- "twilight" used to refer to either a sunset or a sunrise
+	private ZonedDateTime twilightHelper(String keyInJSON) {
+		
+		String locTimeZone = weatherDataJSON.get("timezone").toString();
+		
+		// Create string containing twilight datetime information in format readable by ZonedDateTime parser
+		String twilightStr = weatherDataJSON.getJSONArray("days").getJSONObject(0).get("datetime").toString(); 		//e.g., =  "2023-12-11" (date)
+		twilightStr += "T" + weatherDataJSON.getJSONObject("currentConditions").getString(keyInJSON).toString(); 	//e.g., += "T07:07:50"	(time)
+		twilightStr += ZoneId.of(locTimeZone).getRules().getOffset(LocalDateTime.now());							//e.g., += "-06:00" (UTC offset)
+		twilightStr += "[" + locTimeZone + "]";																		//e.g., += "[America/Chicago] ([timezone])
+		
+		// Return sunset/sunrise time by parsing twilightTime w/ ZonedDateTime parser
+		return ZonedDateTime.parse(twilightStr);
+	}
+	
+	// Sets the sunriseTime field according to the value for the "sunrise" key in the JSON
 	private void setSunriseTime() {
-		String locTimeZone = (String) weatherData.get("timezone");
-		
-		// Create/format string containing all time/date info for the sunrise
-		String sunriseStr = (String) weatherData.getJSONArray("days").getJSONObject(0).get("datetime");
-		sunriseStr += "T" + (String) weatherData.getJSONObject("currentConditions").getString("sunrise");
-		sunriseStr += ZoneId.of(locTimeZone).getRules().getOffset(LocalDateTime.now());
-		sunriseStr += "[" + locTimeZone + "]";
-		
-		// Set sunriseTime by parsing sunriseStr
-		sunriseTime = ZonedDateTime.parse(sunriseStr);
+		sunriseTime = twilightHelper("sunrise");
 	}
 	
 	public ZonedDateTime getSunriseTime() {
 		return sunriseTime;
 	}
 	
+	// Sets the sunsetTime field according to the value for the "sunrise" key in the JSON
 	private void setSunsetTime() {
-		String locTimeZone = (String) weatherData.get("timezone");
-		
-		String sunsetStr = (String) weatherData.getJSONArray("days").getJSONObject(0).get("datetime");
-		sunsetStr += "T" + (String) weatherData.getJSONObject("currentConditions").getString("sunset");
-		sunsetStr += ZoneId.of(locTimeZone).getRules().getOffset(LocalDateTime.now());
-		sunsetStr += "[" + locTimeZone + "]";
-		
-		sunsetTime = ZonedDateTime.parse(sunsetStr);
+		sunsetTime = twilightHelper("sunset");
 	}
 	
 	public ZonedDateTime getSunsetTime() {
 		return sunsetTime;
 	}
 	
-	// Sets currentTemp based on "temp" field of the "currentConditions" JSONObject
+	// Sets currentTemp according to the value for the "temp" key in the "currentConditions" JSONObject
 	private void setCurrentTemp() {
-		currentTemp = weatherData.getJSONObject("currentConditions").get("temp");
+		currentTemp = weatherDataJSON.getJSONObject("currentConditions").get("temp");
 	}
 	
 	public Object getCurrentTemp() {
 		return currentTemp;
 	}
 	
-	// Sets currentSkyConditions based on "conditions" field of the "currentConditions" JSONObject
+	// Sets currentSkyConditions according to the value for the "conditions" key in the "currentConditions" JSONObject
 	private void setCurrentSkyConditions() {
-		currentSkyConditions = weatherData.getJSONObject("currentConditions").get("conditions");
+		currentSkyConditions = weatherDataJSON.getJSONObject("currentConditions").get("conditions");
 	}
 	
 	public Object getCurrentSkyConditions() {
 		return currentSkyConditions;
 	}
 	
-	// Sets currentWindSpeed based on "windspeed" field of the "currentConditions" JSONObject
+	// Sets currentWindSpeed according to the value for the "windspeed" key in the "currentConditions" JSONObject
 	private void setCurrentWindSpeed() {
-		currentWindSpeed = weatherData.getJSONObject("currentConditions").get("windspeed");
+		currentWindSpeed = weatherDataJSON.getJSONObject("currentConditions").get("windspeed");
 	}
 	
 	public Object getCurrentWindSpeed() {
 		return currentWindSpeed;
 	}
 	
-	// Sets currentWindDirection based on "winddir" field of the "currentConditions" JSONObject
+	// Sets currentWindDirection according to the value for the "winddir" key in the "currentConditions" JSONObject
 	private void setCurrentWindDirection() {
-		currentWindDirection = weatherData.getJSONObject("currentConditions").get("winddir");
+		currentWindDirection = weatherDataJSON.getJSONObject("currentConditions").get("winddir");
 	}
 	
 	public Object getCurrentWindDirection() {
 		return currentWindDirection;
 	}
 	
+	// Sets currentUVindex according to the value for the "uvindex" key in the "currentConditions" JSONObject
 	private void setCurrentUVindex() {
-		currentUVindex = weatherData.getJSONObject("currentConditions").get("uvindex");
+		currentUVindex = weatherDataJSON.getJSONObject("currentConditions").get("uvindex");
 	}
 	
 	public Object getCurrentUVindex() {
 		return currentUVindex;
 	}
 	
-	// Starting at (currentHour + 1) of day 0 (today), for the next 24 JSONObjects that appear in the "hours" JSONArrays of the first two
-	// JSONObjects in the "days" JSONArray (i.e, the next 24 hours across today and tomorrow), appends the value in the "temp" field to our 
-	// ArrayList of hourlyTemps. Index 0 of hourlyTemps represents the next hour (i.e., the temp at 5pm if it is 4:12pm). 
-	private void setHourlyTemps() {
-		hourlyTemps.clear();
-			
-		// Starting at currentHour + 1, append today's remaining hourly temperatures (i.e., until !(hour < 24))
+	// For a given weather measurement (specified by keyInJSON), generates an ArrayList of hourly values for that weather measurement
+	// for the next 24 hours. Index 0 of the ArrayList represents the next hour (i.e., the weather measurement at 5pm if it is 4:12pm). 
+	// Used as a helper function to standardize setHourly_() methods.
+	private ArrayList<Object> hourlyHelper(String keyInJSON) {
+		
+		ArrayList<Object> hourlyData = new ArrayList<Object>();
+		
+		// Starting at currentHour + 1, append today's (i.e., day 0) remaining hourly data values (i.e., until !(hour < 24)) for the given keyInJSON
 		int currentHour = getHour();
 		for(int hour = currentHour + 1; hour < 24; hour++) {
-			hourlyTemps.add(weatherData.getJSONArray("days").getJSONObject(0).getJSONArray("hours").getJSONObject(hour).get("temp"));
+			hourlyData.add(weatherDataJSON.getJSONArray("days").getJSONObject(0).getJSONArray("hours").getJSONObject(hour).get(keyInJSON));
 		}
 		
-		// Starting at hour 0 (i.e. midnight), append tomorrow's hourly temperatures until 24 total hourlyTemps have been stored
+		// Starting at hour 0 (i.e. midnight), append tomorrow's (i.e., day 1) hourly data values until 24 total values have been stored
 		for(int hour = 0; hour <= currentHour; hour++) {
-			hourlyTemps.add(weatherData.getJSONArray("days").getJSONObject(1).getJSONArray("hours").getJSONObject(hour).get("temp"));
+			hourlyData.add(weatherDataJSON.getJSONArray("days").getJSONObject(1).getJSONArray("hours").getJSONObject(hour).get(keyInJSON));
 		}
 		
+		return hourlyData;
+	}
+	
+	// Stores the next 24 hours of hourlyTemps according to the hourly values for the "temp" key in the JSON
+	private void setHourlyTemps() {
+		hourlyTemps = hourlyHelper("temp");
 	}
 	
 	public ArrayList<Object> getHourlyTemps() {
 		return hourlyTemps;
 	}
 	
-	// Starting at (currentHour + 1) of day 0 (today), for the next 24 JSONObjects that appear in the "hours" JSONArrays of the first two
-	// JSONObjects in the "days" JSONArray (i.e, the next 24 hours across today and tomorrow), appends the value in the "windspeed" field to our 
-	// ArrayList of hourlyWindSpeeds. Index 0 of hourlyWindSpeeds represents the next hour (i.e., the windSpeed at 5pm if it is 4:12pm). 
+	// Stores the next 24 hours of hourly sky conditions according to the hourly values for the "conditions" key in the JSON
+	private void setHourlySkyConditions() {
+		hourlySkyConditions = hourlyHelper("conditions");
+	}
+	
+	public ArrayList<Object> getHourlySkyConditions() {
+		return hourlySkyConditions;
+	}	
+	
+	// Stores the next 24 hours of hourlyWindSpeeds according to the hourly values for the "windspeed" key in the JSON
 	private void setHourlyWindSpeeds() {
-		hourlyWindSpeeds.clear();
-		
-		// Starting at currentHour + 1, append today's remaining hourly WindSpeeds (i.e., until !(hour < 24))
-		int currentHour = getHour();
-		for(int hour = currentHour + 1; hour < 24; hour++) {
-			hourlyWindSpeeds.add(weatherData.getJSONArray("days").getJSONObject(0).getJSONArray("hours").getJSONObject(hour).get("windspeed"));
-		}
-				
-		// Starting at hour 0 (i.e. midnight), append tomorrow's hourly WindSpeeds until 24 total hourlyWindSpeeds have been stored
-		for(int hour = 0; hour <= currentHour; hour++) {
-			hourlyWindSpeeds.add(weatherData.getJSONArray("days").getJSONObject(1).getJSONArray("hours").getJSONObject(hour).get("windspeed"));
-		}
-		
+		hourlyWindSpeeds = hourlyHelper("windspeed");
 	}
 	
 	public ArrayList<Object> getHourlyWindSpeeds() {
 		return hourlyWindSpeeds;
 	}
 	
-	// Starting at (currentHour + 1) of day 0 (today), for the next 24 JSONObjects that appear in the "hours" JSONArrays of the first two
-	// JSONObjects in the "days" JSONArray (i.e, the next 24 hours across today and tomorrow), appends the value in the "precipprob" field to our 
-	// ArrayList of hourlyPrecipProbs. Index 0 of hourlyPrecipProbs represents the next hour (i.e., the precipProb at 5pm if it is 4:12pm). 
+	// Stores the next 24 hours of hourly precipitation probabilities according to the hourly values for the "precipprob" key in the JSON
 	private void setHourlyPrecipProbs() {
-		hourlyPrecipProbs.clear();
-		
-		// Starting at currentHour + 1, append today's remaining hourly PrecipProbs (i.e., until !(hour < 24))
-		int currentHour = getHour();
-		for(int hour = currentHour + 1; hour < 24; hour++) {
-			hourlyPrecipProbs.add(weatherData.getJSONArray("days").getJSONObject(0).getJSONArray("hours").getJSONObject(hour).get("precipprob"));
-		}
-						
-		// Starting at hour 0 (i.e. midnight), append tomorrow's hourly PrecipProbs until 24 total hourlyPrecipProbs have been stored
-		for(int hour = 0; hour <= currentHour; hour++) {
-			hourlyPrecipProbs.add(weatherData.getJSONArray("days").getJSONObject(1).getJSONArray("hours").getJSONObject(hour).get("precipprob"));
-		}
-		
+		hourlyPrecipProbs = hourlyHelper("precipprob");
 	}
 	
 	public ArrayList<Object> getHourlyPrecipProbs() {
 		return hourlyPrecipProbs;
 	}
 	
-	// [Same implementation as previous hourly setters]
-	// Index 0 of hourlyHumidities represents the next hour (i.e., the humidity at 5pm if it is 4:12pm)
+	// Stores the next 24 hours of hourly humidities according to the hourly values for the "humidity" key in the JSON
 	private void setHourlyHumidities() {
-		hourlyHumidities.clear();
-		
-		// Starting at currentHour + 1, append today's remaining hourly humidities (i.e., until !(hour < 24))
-		int currentHour = getHour();
-		for(int hour = currentHour + 1; hour < 24; hour++) {
-			hourlyHumidities.add(weatherData.getJSONArray("days").getJSONObject(0).getJSONArray("hours").getJSONObject(hour).get("humidity"));
-		}
-						
-		// Starting at hour 0 (i.e. midnight), append tomorrow's hourly humidities until 24 total hourlyHumidities have been stored
-		for(int hour = 0; hour <= currentHour; hour++) {
-			hourlyHumidities.add(weatherData.getJSONArray("days").getJSONObject(1).getJSONArray("hours").getJSONObject(hour).get("humidity"));
-		}
+		hourlyHumidities = hourlyHelper("humidity");
 	}
 	
-	public ArrayList<Object> getHourlyHumidities(){
+	public ArrayList<Object> getHourlyHumidities() {
 		return hourlyHumidities;
 	}
 	
-	// [Same implementation as previous hourly setters]
-	// Index 0 of hourlySkyConditions represents the next hour (i.e., the sky conditions at 5pm if it is 4:12pm)
-	private void setHourlySkyConditions() {
-		hourlySkyConditions.clear();
+	// For a given weather measurement (specified by keyInJSON), generates an ArrayList of daily values for that weather measurement
+	// for the next 15 days. Index 0 of the ArrayList represents today's value for that weather measurement. 
+	// Used as a helper function to standardize setDaily_() methods.
+	private ArrayList<Object> dailyHelper(String keyInJSON) {
 		
-		// Starting at currentHour + 1, append today's remaining hourly humidities (i.e., until !(hour < 24))
-		int currentHour = getHour();
-		for(int hour = currentHour + 1; hour < 24; hour++) {
-			hourlySkyConditions.add(weatherData.getJSONArray("days").getJSONObject(0).getJSONArray("hours").getJSONObject(hour).get("conditions"));
-		}
-								
-		// Starting at hour 0 (i.e. midnight), append tomorrow's hourly humidities until 24 total hourlyHumidities have been stored
-		for(int hour = 0; hour <= currentHour; hour++) {
-			hourlySkyConditions.add(weatherData.getJSONArray("days").getJSONObject(1).getJSONArray("hours").getJSONObject(hour).get("conditions"));
-		}
-	}
-	
-	public ArrayList<Object> getHourlySkyConditions(){
-		return hourlySkyConditions;
-	}
-	
-	// For each JSONObject in the "days" JSONArray (i.e., for each day), 
-	// appends the value in the "tempmax" field to our ArrayList of dailyMaxTemps. Index 0 is today's maximum temp.
-	private void setDailyMaxTemps() {
-		dailyMaxTemps.clear();
+		ArrayList<Object> dailyData = new ArrayList<Object>();
 		
 		for(int day = 0; day < 15; day++) {
-			dailyMaxTemps.add(weatherData.getJSONArray("days").getJSONObject(day).get("tempmax"));
+			dailyData.add(weatherDataJSON.getJSONArray("days").getJSONObject(day).get(keyInJSON));
 		}
+		
+		return dailyData;
+	}
+	
+	// Stores 15 days (including today at index 0) of daily max/high temperatures according to the daily values for the "tempmax" key in the JSON
+	private void setDailyMaxTemps() {
+		dailyMaxTemps = dailyHelper("tempmax");
 	}
 	
 	public ArrayList<Object> getDailyMaxTemps() {
 		return dailyMaxTemps;
 	}
 	
-	// For each JSONObject in the "days" JSONArray (i.e., for each day), 
-	// appends the value in the "tempmin" field to our ArrayList of dailyMinTemps. Index 0 is today's minimum temp.
+	// Stores 15 days (including today at index 0) of daily min/low temperatures according to the daily values for the "tempmin" key in the JSON
 	private void setDailyMinTemps() {
-		dailyMinTemps.clear();
-		
-		for(int day = 0; day < 15; day++) {
-			dailyMinTemps.add(weatherData.getJSONArray("days").getJSONObject(day).get("tempmin"));
-		}
+		dailyMinTemps = dailyHelper("tempmin");
 	}
 	
 	public ArrayList<Object> getDailyMinTemps() {
 		return dailyMinTemps;
 	}
 	
-	// For each JSONObject in the "days" JSONArray (i.e., for each day), 
-	// appends the value in the "conditions" field to our ArrayList of dailySkyConditions. Index 0 is today's sky conditions.
+	// Stores 15 days (including today at index 0) of daily sky conditions according to the daily values for the "conditions" key in the JSON
 	private void setDailySkyConditions() {
-		dailySkyConditions.clear();
-		
-		for(int day = 0; day < 15; day++) {
-			dailySkyConditions.add(weatherData.getJSONArray("days").getJSONObject(day).get("conditions"));
-		}
+		dailySkyConditions = dailyHelper("conditions");
 	}
 	
-	public ArrayList<Object> getDailySkyConditions(){
+	public ArrayList<Object> getDailySkyConditions() {
 		return dailySkyConditions;
 	}
 	
