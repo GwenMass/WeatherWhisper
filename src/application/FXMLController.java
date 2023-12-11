@@ -336,7 +336,7 @@ public class FXMLController {
 	            String imagePath = getClass().getResource(conditionImageMap.get(condition)).toExternalForm();
 	            Image image = new Image(imagePath);
 	            moonImg.setImage(image);
-	            
+	            moonPhaseDisplay.setText(calledWeather.getMoonPhase().toString());
 	        } else {
 	            System.out.println("Condition Not Found Error!");
 	        }
