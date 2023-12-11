@@ -18,12 +18,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import java.util.ArrayList?>
 <VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml" 
+      xmlns:fx="http://javafx.com/fxml"
       fx:controller="application.FXMLController">
-      
  
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="1049.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+   		<ImageView fx:id="backgroundGif" fitWidth="1049.0" fitHeight="540.0">
+        </ImageView>
       <Pane layoutX="15.0" layoutY="326.0" prefHeight="200.0" prefWidth="318.0" styleClass="roundedPane" AnchorPane.leftAnchor="15.0">
          <children>
             <VBox fx:id="dailyVbox" prefHeight="200.0" prefWidth="318.0">
@@ -78,17 +79,22 @@
     		</ImageView>
     		<ImageView fx:id="dynamicArrow" fitWidth="200.0" fitHeight="200">
             	<Image url="@compassArrow.png"/>
-            	</ImageView>
+            </ImageView>
          </children>
       </Pane>
-      <Pane layoutX="607.0" layoutY="201.0" prefHeight="325.0" prefWidth="373.0" styleClass="roundedPane">
+      <Pane layoutX="570.0" layoutY="201.0" prefHeight="175" prefWidth="200" styleClass="roundedPane">
          <children>
-            <Text fx:id = "radarDisp" layoutX="105.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precipitation Radar: City, State " style="-fx-font-weight: bold;"/>
-            <Pane layoutX="21.0" layoutY="24.0" prefHeight="282.0" prefWidth="331.0" style="-fx-background-color: blue;">
-               <children>
-                  <ImageView fitHeight="282.0" fitWidth="331.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </Pane>
+            <Text fx:id = "uvIndexDisplay" layoutX="105.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UV Index: " style="-fx-font-weight: bold;"/>
+         </children>
+      </Pane>
+      <Pane layoutX="785.0" layoutY="201.0" prefHeight="175" prefWidth="200" styleClass="roundedPane">
+         <children>
+            <Text fx:id = "moonPhaseDisplay" layoutX="105.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moon Phase: " style="-fx-font-weight: bold;"/>
+         </children>
+      </Pane>
+      <Pane layoutX="570.0" layoutY="386.0" prefHeight="140" prefWidth="415" styleClass="roundedPane">
+         <children>
+            <Text fx:id = "sunsetSunriseDisplay" layoutX="105.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sunset and Sunrise: " style="-fx-font-weight: bold;"/>
          </children>
       </Pane>
       <TabPane layoutX="15.0" layoutY="202.0" prefHeight="114.0" prefWidth="537.0" styleClass="roundedPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="15.0">
@@ -103,49 +109,49 @@
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour1.text}"/>
                                     <Text fx:id = "hour1Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg1F" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true"/>
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour2.text}" />
                                     <Text fx:id = "hour2Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg2F" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour3.text}" />
                                     <Text fx:id = "hour3Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg3F" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour4.text}" />
                                     <Text fx:id = "hour4Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg4F" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour5.text}" />
                                     <Text fx:id = "hour5Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg5F" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour6.text}" />
                                     <Text fx:id = "hour6Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg6F" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour7.text}" />
                                     <Text fx:id = "hour7Fahrenheit" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="F" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg7F" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                            </children>
@@ -167,35 +173,35 @@
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour1.text}"/>
                                     <Text fx:id = "hour1Celsius" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg1C" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text  layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour2.text}" />
                                     <Text  fx:id = "hour2Celsius" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg2C" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text  layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour3.text}" />
                                     <Text  fx:id = "hour3Celsius" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg3C" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text  layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour4.text}" />
                                     <Text  fx:id = "hour4Celsius" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg4C" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text  layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour5.text}" />
                                     <Text  fx:id = "hour5Celsius" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg5C" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
@@ -203,14 +209,14 @@
                                     <Text  layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour6.text}" />
                                     <Text  fx:id = "hour6Celsius" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
                                     <Text layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg6C" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text  layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour7.text}" />
                                     <Text  fx:id = "hour7Celsius" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="C" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="hourlyImg7C" fitHeight="34.0" fitWidth="50.0" layoutX="20.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                            </children>
@@ -440,6 +446,26 @@
 	      		<fx:reference source="hour5Precip"/>
 	      		<fx:reference source="hour6Precip"/>
 	      		<fx:reference source="hour7Precip"/>
+	      	</ArrayList>
+	      	
+	      	<ArrayList fx:id = "hourSymbolsF">
+	      		<fx:reference source="hourlyImg1F"/>
+	      		<fx:reference source="hourlyImg2F"/>
+	      		<fx:reference source="hourlyImg3F"/>
+	      		<fx:reference source="hourlyImg4F"/>
+	      		<fx:reference source="hourlyImg5F"/>
+	      		<fx:reference source="hourlyImg6F"/>
+	      		<fx:reference source="hourlyImg7F"/>
+	      	</ArrayList>
+	      	
+	      	<ArrayList fx:id = "hourSymbolsC">
+	      		<fx:reference source="hourlyImg1C"/>
+	      		<fx:reference source="hourlyImg2C"/>
+	      		<fx:reference source="hourlyImg3C"/>
+	      		<fx:reference source="hourlyImg4C"/>
+	      		<fx:reference source="hourlyImg5C"/>
+	      		<fx:reference source="hourlyImg6C"/>
+	      		<fx:reference source="hourlyImg7C"/>
 	      	</ArrayList>
 	      </fx:define>
 	      

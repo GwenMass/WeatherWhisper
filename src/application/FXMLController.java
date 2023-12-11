@@ -12,6 +12,8 @@ import javafx.event.ActionEvent;
 import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.time.ZonedDateTime;
 import WeatherWhisper.WeatherDataAPI;
 
@@ -30,6 +32,9 @@ public class FXMLController {
 	@FXML ArrayList<Text> hourWind;
 	@FXML ArrayList<Text> hourPrecip;
 	@FXML Label address;
+	@FXML ImageView backgroundGif;
+	@FXML ArrayList<ImageView> hourSymbolsF;
+	@FXML ArrayList<ImageView> hourSymbolsC;
 	@FXML Text currentTemp;
 	@FXML Label weatherDesc;
 	@FXML Text compassText;
@@ -39,11 +44,6 @@ public class FXMLController {
 	@FXML Button hourRight;
 	@FXML Image compassArrow = new Image(getClass().getResourceAsStream("compassArrow.png"));
 	@FXML ImageView dynamicArrow = new ImageView(compassArrow);
-	// Initializes values with placeholders for startup
-	@FXML private void startup() 
-	{
-		
-	}
 
 	// Read data from the given WeatherDataAPI object containing data from an API request for a particular city's weather
 	@FXML public void initialize(WeatherDataAPI weather) 
@@ -58,6 +58,10 @@ public class FXMLController {
 		searchBox.setOnMouseClicked(this::searchTextHandler);
 		//hourLeft.setOnAction(this::shiftHourHandler);
 		//hourRight.setOnAction(this::shiftHourHandler);
+		
+		setBackground();
+		setHourlyWeatherSymbols(hourSymbolsF, currentHour);
+		setHourlyWeatherSymbols(hourSymbolsC, currentHour);
 	
 		//initialize tags for header info
 		address.setText(weather.getAddress().toString());
@@ -243,4 +247,65 @@ public class FXMLController {
 		else searchBox.setText("Invalid Location, Try again");
 	}
 	
+	
+	//Set the background to the correct correlating sky condition
+	private void setBackground() {
+	    Object currConditions = calledWeather.getCurrentSkyConditions();
+
+	    if (currConditions != null) {
+	        String condition = currConditions.toString();
+
+	        //Map of sky condition output --> correlating gif/jpg
+	        Map<String, String> conditionImageMap = Map.of(
+	                "Clear", "sunny.jpg",
+	                "Rain", "rainy.gif",
+	                "Partially cloudy", "partlyCloudy.gif",
+	                "Overcast", "cloudy.gif",
+	                "Rain, Partially cloudy", "rainy.gif",
+	                "Rain, Overcast", "rainy.gif",
+	                "Snow, Overcast", "snowy.gif",
+	                "Snow, Partially cloudy", "snowy.gif",
+	                "Snow", "snowy.gif"
+	        );
+
+	        // Check if a key is true and set the correct background image
+	        if (conditionImageMap.containsKey(condition)) {
+	            String imagePath = getClass().getResource(conditionImageMap.get(condition)).toExternalForm();
+	            Image image = new Image(imagePath);
+	            backgroundGif.setImage(image);
+	            
+	        } else {
+	            System.out.println("Condition Not Found Error!");
+	        }
+	    }
+	}	
+	private void setHourlyWeatherSymbols(List<ImageView> hourSymbols, int startingHour) {
+		//Map of sky condition output --> correlating symbols
+	    Map<String, String> conditionImageMap = Map.of(
+	            "Clear", "Sunny.png",
+	            "Rain", "Raining.png",
+	            "Partially cloudy", "PartlyCloudy.png",
+	            "Overcast", "Cloudy.png",
+	            "Rain, Partially cloudy", "Raining.png",
+	            "Rain, Overcast", "Raining.png",
+	            "Snow, Overcast", "snowy.png",
+	            "Snow, Partially cloudy", "snowy.png",
+	            "Snow", "snowy.png"
+	    );
+
+	    int iterator = 0;
+	    //Loop for setting the images
+	    for (ImageView iv : hourSymbols) {
+	        Object current = calledWeather.getHourlySkyConditions().get(iterator++);
+	        System.out.println(current);
+	        String condition = current.toString();
+	        
+	        // Check if a key is true and set the correct symbol
+	        if (conditionImageMap.containsKey(condition)) {
+	            String imagePath = getClass().getResource(conditionImageMap.get(condition)).toExternalForm();
+	            Image image = new Image(imagePath);
+	            iv.setImage(image);
+	        }
+	    }
+	}
 }
