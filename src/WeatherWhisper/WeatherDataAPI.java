@@ -17,6 +17,7 @@ public class WeatherDataAPI {
 	private ZonedDateTime currentTime;
 	private ZonedDateTime sunriseTime;
 	private ZonedDateTime sunsetTime;
+	private Object moonPhase;
 	private Object currentTemp;
 	private Object currentSkyConditions;
 	private Object currentWindSpeed;
@@ -63,6 +64,7 @@ public class WeatherDataAPI {
 				setCurrentTime();
 				setSunriseTime();
 				setSunsetTime();
+				setMoonPhase();
 				setCurrentTemp();
 				setCurrentSkyConditions();
 				setCurrentWindSpeed();
@@ -159,6 +161,15 @@ public class WeatherDataAPI {
 	
 	public ZonedDateTime getSunsetTime() {
 		return sunsetTime;
+	}
+	
+	// Sets today's moon phase according to the value for the "moonphase" key in the "currentConditions" JSONObject
+	private void setMoonPhase() {
+		moonPhase = weatherDataJSON.getJSONObject("currentConditions").get("moonphase");
+	}
+	
+	public Object getMoonPhase() {
+		return moonPhase;
 	}
 	
 	// Sets currentTemp according to the value for the "temp" key in the "currentConditions" JSONObject
