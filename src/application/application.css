@@ -10,6 +10,18 @@
     -fx-font-weight: bold;
 }
 
+.uvBox{
+	-fx-alignment: center;
+	-fx-spacing: 18;
+	-fx-padding: 0 0 0 12;
+}
+
+.moonBox{
+	-fx-alignment: center;
+	-fx-spacing: 20;
+	-fx-padding: 0 0 0 50;
+}
+
 .labelBox {
 	-fx-alignment: center;
 }
