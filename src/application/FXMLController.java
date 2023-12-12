@@ -48,13 +48,11 @@ public class FXMLController {
 	@FXML Image arrow = new Image(getClass().getResourceAsStream("compassArrow.png"));
 	@FXML ImageView compassArrow = new ImageView(arrow);
 	@FXML ImageView uvArrow = new ImageView(arrow);
-	Rotate compassRotation = new Rotate(0);
-	Rotate uvRotation = new Rotate(0);
-	@FXML Image compassArrow = new Image(getClass().getResourceAsStream("compassArrow.png"));
-	@FXML ImageView dynamicArrow = new ImageView(compassArrow);
 	@FXML Text moonPhaseDisplay;
 	@FXML ImageView moonImg;
-
+	
+	Rotate compassRotation = new Rotate(0);
+	Rotate uvRotation = new Rotate(0);
 	// Read data from the given WeatherDataAPI object containing data from an API request for a particular city's weather
 	@FXML public void initialize(WeatherDataAPI weather) 
 	{
