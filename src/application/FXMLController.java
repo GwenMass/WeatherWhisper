@@ -52,6 +52,8 @@ public class FXMLController {
 	@FXML ImageView moonImg;
 	@FXML ArrayList<ImageView> dailySymbols;
 	@FXML ArrayList<ImageView> arrows;
+	@FXML Text sunsetT;
+	@FXML Text sunriseT;
 	
 	Rotate compassRotation = new Rotate(0);
 	Rotate uvRotation = new Rotate(0);
@@ -75,6 +77,7 @@ public class FXMLController {
 		setDailySymbols();
 		setMoonPhase();
 		setWindArrows(currentHour);
+		setSunTimes();
 	
 		//initialize tags for header info
 		address.setText(weather.getAddress().toString());
@@ -440,7 +443,6 @@ public class FXMLController {
 		    
 			//Parse for wind direction angle
 		    double windDirection = Double.parseDouble(windDirectionObject.toString());
-		    System.out.println(windDirection);
 		    
 		    //Set the image and i++
 		    if (iterator < arrows.size()) {
@@ -451,5 +453,18 @@ public class FXMLController {
 		        iterator++;
 		    }
 		}
+	}
+	private void setSunTimes() {
+		//Set sunset
+
+		ZonedDateTime sunsetTime = calledWeather.getSunsetTime();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+		String formattedSunsetTime = sunsetTime.format(formatter);
+		sunsetT.setText(formattedSunsetTime);
+		
+		//Set sunrise
+		ZonedDateTime sunriseTime = calledWeather.getSunriseTime();
+		String formattedSunriseTime = sunriseTime.format(formatter);
+		sunriseT.setText(formattedSunriseTime);
 	}
 }
