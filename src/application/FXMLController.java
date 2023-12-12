@@ -109,20 +109,20 @@ public class FXMLController {
 	//initialize UV amount & UV Arrow
 	private void initializeUV()
 	{
-		System.out.println(calledWeather.getCurrentUVindex());
+		System.out.println("UV:" + calledWeather.getCurrentUVindex());
 		String uvString =calledWeather.getCurrentUVindex().toString();
 		uvIndexDisplay.setText(uvString);
 		Double uv = Double.parseDouble(uvString);
 		double angle = 0;
-		
+		uv = 5.0;
 		//logic for getting angle of UV
-		if (uv >= 11) angle = 162;
-		if (uv > 7 && uv < 11) angle = 126;
-		if (uv >= 5 && uv <= 7) angle = 90;
-		if (uv >2 && uv < 5) angle = 54;
-		if (uv >= 1 && uv <= 2) angle = 18;
+		if (uv >= 11) angle = 75;
+		if (uv >=8 && uv <= 10) angle = 40;
+		if (uv >= 6 && uv <= 7) angle = 0;
+		if (uv >=3 && uv <= 5) angle = -40;
+		if (uv >= 1 && uv <= 2) angle = -75;
 		if (uv == 0) angle = 0;
-		
+		System.out.println("angle:" + angle);
 		//create arrow direction
 		uvRotation.setPivotX(uvArrow.getBoundsInLocal().getWidth()/2);
 		uvRotation.setPivotY(uvArrow.getBoundsInLocal().getHeight());
