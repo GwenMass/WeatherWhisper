@@ -14,6 +14,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import java.util.ArrayList?>
+<?import javafx.scene.layout.StackPane?>
+
 <VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FXMLController">
  
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="1049.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
@@ -383,22 +385,24 @@
             </Tab>
         </tabs>
       </TabPane>
-      <VBox alignment="TOP_CENTER" layoutX="263.0" layoutY="52.0" prefHeight="122.0" prefWidth="524.0" styleClass="labelBox">
-      	<children>
-        	<HBox alignment="TOP_CENTER" spacing="5" styleClass="fieldBox">
-            	<TextField fx:id="searchBox" minHeight="30" text="Location:" />
-            	<Button fx:id="searchButton" minHeight="29" minWidth="45" text="GO" />
-        	</HBox>
-        	<Label fx:id="address" styleClass="anchorLabel" text="City, State">
-            	<padding>
-                	<Insets top="15.0" />
-            	</padding>
-        	</Label>
-        	<Text fx:id="currentTemp" style="-fx-font-size: 20px" styleClass="anchorLabel" text="Degrees" textAlignment="CENTER" wrappingWidth="525.6171875" />
-        	<Label fx:id="weatherDesc" styleClass="anchorLabel" text="Weather Type" />
-        	<Text fx:id="currentBound" styleClass="anchorLabel" text="H: L:" />
-    	</children>
-   	</VBox>
+      <StackPane styleClass="roundedPane" layoutX="263.0" layoutY="50.0">
+	      	<VBox alignment="BOTTOM_CENTER" styleClass="labelBox">
+		      	<children>
+		        	<HBox alignment="TOP_CENTER" spacing="5" styleClass="fieldBox">
+		            	<TextField fx:id="searchBox" minHeight="30" text="Location:" />
+		            	<Button fx:id="searchButton" minHeight="29" minWidth="45" text="GO" />
+		        	</HBox>
+		        	<Label fx:id="address" styleClass="anchorLabel" text="City, State">
+		            	<padding>
+		                	<Insets top="15.0" />
+		            	</padding>
+		        	</Label>
+		        	<Text fx:id="currentTemp" style="-fx-font-size: 20px" styleClass="anchorLabel" text="Degrees" textAlignment="CENTER" wrappingWidth="525.6171875" />
+		        	<Label fx:id="weatherDesc" styleClass="anchorLabel" text="Weather Type" />
+		        	<Text fx:id="currentBound" styleClass="anchorLabel" text="H: L:" />
+		    	</children>
+		   	</VBox>
+      </StackPane>
    </children>
 </AnchorPane>
 	
