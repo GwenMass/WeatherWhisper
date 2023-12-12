@@ -50,6 +50,7 @@ public class FXMLController {
 	@FXML ImageView uvArrow = new ImageView(arrow);
 	@FXML Text moonPhaseDisplay;
 	@FXML ImageView moonImg;
+	@FXML ArrayList<ImageView> dailySymbols;
 	
 	Rotate compassRotation = new Rotate(0);
 	Rotate uvRotation = new Rotate(0);
@@ -70,6 +71,7 @@ public class FXMLController {
 		setBackground();
 		setHourlyWeatherSymbols(hourSymbolsF, currentHour);
 		setHourlyWeatherSymbols(hourSymbolsC, currentHour);
+		setDailySymbols();
 		setMoonPhase();
 	
 		//initialize tags for header info
@@ -338,7 +340,6 @@ public class FXMLController {
 	    //Loop for setting the images
 	    for (ImageView iv : hourSymbols) {
 	        Object current = calledWeather.getHourlySkyConditions().get(iterator++);
-	        System.out.println(current);
 	        String condition = current.toString();
 	        
 	        // Check if a key is true and set the correct symbol
@@ -379,5 +380,32 @@ public class FXMLController {
 	            System.out.println("Condition Not Found Error!");
 	        }
 		}
+	}
+	private void setDailySymbols() {
+		//Map of sky condition output --> correlating symbols
+	    Map<String, String> conditionImageMap = Map.of(
+	            "Clear", "Sunny.png",
+	            "Rain", "Raining.png",
+	            "Partially cloudy", "PartlyCloudy.png",
+	            "Overcast", "Cloudy.png",
+	            "Rain, Partially cloudy", "Raining.png",
+	            "Rain, Overcast", "Raining.png",
+	            "Snow, Overcast", "snowy.png",
+	            "Snow, Partially cloudy", "snowy.png",
+	            "Snow", "snowy.png"
+	    );
+	    
+	    int iterator = 0;
+	    
+	    for(ImageView iv : dailySymbols) {
+	    	Object current = calledWeather.getDailySkyConditions().get(iterator++);
+	        String condition = current.toString();
+	        
+	        if (conditionImageMap.containsKey(condition)) {
+	            String imagePath = getClass().getResource(conditionImageMap.get(condition)).toExternalForm();
+	            Image image = new Image(imagePath);
+	            iv.setImage(image);
+	        }
+	    }
 	}
 }
