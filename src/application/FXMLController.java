@@ -50,6 +50,11 @@ public class FXMLController {
 	@FXML ImageView uvArrow = new ImageView(arrow);
 	Rotate compassRotation = new Rotate(0);
 	Rotate uvRotation = new Rotate(0);
+	@FXML Image compassArrow = new Image(getClass().getResourceAsStream("compassArrow.png"));
+	@FXML ImageView dynamicArrow = new ImageView(compassArrow);
+	@FXML Text moonPhaseDisplay;
+	@FXML ImageView moonImg;
+
 	// Read data from the given WeatherDataAPI object containing data from an API request for a particular city's weather
 	@FXML public void initialize(WeatherDataAPI weather) 
 	{
@@ -67,6 +72,7 @@ public class FXMLController {
 		setBackground();
 		setHourlyWeatherSymbols(hourSymbolsF, currentHour);
 		setHourlyWeatherSymbols(hourSymbolsC, currentHour);
+		setMoonPhase();
 	
 		//initialize tags for header info
 		address.setText(weather.getAddress().toString());
@@ -329,7 +335,7 @@ public class FXMLController {
 	            "Snow, Partially cloudy", "snowy.png",
 	            "Snow", "snowy.png"
 	    );
-
+	    
 	    int iterator = 0;
 	    //Loop for setting the images
 	    for (ImageView iv : hourSymbols) {
@@ -344,5 +350,36 @@ public class FXMLController {
 	            iv.setImage(image);
 	        }
 	    }
+	}
+	
+	private void setMoonPhase()
+	{
+		Object currConditions = calledWeather.getMoonPhase();
+		
+		if (currConditions != null) {
+	        String condition = currConditions.toString();
+
+	        //Map of sky condition output --> correlating gif/jpg
+	        Map<String, String> conditionImageMap = Map.of(
+	                "New Moon", "newMoon.png",
+	                "Waxing Crescent", "waxingCrescent.png",
+	                "First Quarter", "firstQuarter.png",
+	                "Waxing Gibbous", "waxingGibbous.png",
+	                "Full Moon", "fullMoon.png",
+	                "Waning Gibbous", "waningGibbous.png",
+	                "Last Quarter", "thirdQuarter.png",
+	                "Waning Crescent", "waningCrescent.png"
+	        );
+
+	        // Check if a key is true and set the correct background image
+	        if (conditionImageMap.containsKey(condition)) {
+	            String imagePath = getClass().getResource(conditionImageMap.get(condition)).toExternalForm();
+	            Image image = new Image(imagePath);
+	            moonImg.setImage(image);
+	            moonPhaseDisplay.setText(calledWeather.getMoonPhase().toString());
+	        } else {
+	            System.out.println("Condition Not Found Error!");
+	        }
+		}
 	}
 }

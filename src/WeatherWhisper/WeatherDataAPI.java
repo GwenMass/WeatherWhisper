@@ -1,6 +1,7 @@
 package WeatherWhisper;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -17,6 +18,7 @@ public class WeatherDataAPI {
 	private ZonedDateTime currentTime;
 	private ZonedDateTime sunriseTime;
 	private ZonedDateTime sunsetTime;
+	private String moonPhase;
 	private Object currentTemp;
 	private Object currentSkyConditions;
 	private Object currentWindSpeed;
@@ -63,6 +65,7 @@ public class WeatherDataAPI {
 				setCurrentTime();
 				setSunriseTime();
 				setSunsetTime();
+				setMoonPhase();
 				setCurrentTemp();
 				setCurrentSkyConditions();
 				setCurrentWindSpeed();
@@ -159,6 +162,38 @@ public class WeatherDataAPI {
 	
 	public ZonedDateTime getSunsetTime() {
 		return sunsetTime;
+	}
+	
+	// Sets today's moon phase according to the value for the "moonphase" key in the "currentConditions" JSONObject
+	private void setMoonPhase() {
+		BigDecimal moonPhaseJSON = (BigDecimal) weatherDataJSON.getJSONObject("currentConditions").get("moonphase");
+		double moonPhaseValue = moonPhaseJSON.doubleValue();
+		
+		// Derive name for current moon phase from decimal value stored at "moonphase" in jJSON
+		if(moonPhaseValue < 0 || moonPhaseValue > 1)
+			moonPhase = "invalid moonphase value";
+		else if(moonPhaseValue == 0)
+			moonPhase = "New Moon";
+		else if(moonPhaseValue < 0.25)
+			moonPhase = "Waxing Crescent";
+		else if(moonPhaseValue == 0.25)
+			moonPhase = "First Quarter";
+		else if(moonPhaseValue < 0.5)
+			moonPhase = "Waxing Gibbous";
+		else if(moonPhaseValue == 0.5)
+			moonPhase = "Full Moon";
+		else if(moonPhaseValue < 0.75)
+			moonPhase = "Waning Gibbous";
+		else if(moonPhaseValue == 0.75)
+			moonPhase = "Last Quarter";
+		else if(moonPhaseValue <= 1)
+			moonPhase = "Waning Crescent";
+		else
+			moonPhase = "invalid moonphase value"; //should be unreachable
+	}
+	
+	public String getMoonPhase() {
+		return moonPhase;
 	}
 	
 	// Sets currentTemp according to the value for the "temp" key in the "currentConditions" JSONObject

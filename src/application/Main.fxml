@@ -79,12 +79,22 @@
       </Pane>
       <Pane layoutX="570.0" layoutY="201.0" prefHeight="175" prefWidth="200" styleClass="roundedPane">
          <children>
-            <Text fx:id="uvIndexDisplay" layoutX="105.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="UV Index: " />
+         	<VBox fx:id="uvVbox" styleClass="uvBox" >
+         		<Text  strokeType="OUTSIDE" strokeWidth="0.0" text="UV Index" style="-fx-font-weight: bold;"/>
+         		<ImageView fitHeight="150.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+         			<Image url="@UVChart.png"/>
+         		</ImageView>
+         		<Text fx:id = "uvIndexDisplay" text="uvNum"/>
+         	</VBox>
          </children>
       </Pane>
       <Pane layoutX="785.0" layoutY="201.0" prefHeight="175" prefWidth="200" styleClass="roundedPane">
          <children>
-            <Text fx:id="moonPhaseDisplay" layoutX="105.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Moon Phase: " />
+         	<VBox fx:id="moonBox" styleClass="moonBox">
+	         	<Text fx:id = "moonPhaseDisplay" layoutX="105.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Moon Phase" style="-fx-font-weight: bold;"/>
+	            <ImageView fx:id="moonImg" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true"/>
+	         	<Text fx:id="moonPhaseDisplay" text="Phase"/>
+         	</VBox>
          </children>
       </Pane>
       <Pane layoutX="570.0" layoutY="386.0" prefHeight="140" prefWidth="415" styleClass="roundedPane">
