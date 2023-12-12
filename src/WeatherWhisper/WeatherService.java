@@ -33,9 +33,9 @@ public class WeatherService {
 		HttpRequest request = HttpRequest.newBuilder()
 			.uri(URI.create(identifier))
 			.method("GET", HttpRequest.BodyPublishers.noBody()).build();
-		HttpResponse response = HttpClient.newHttpClient()
+		HttpResponse<?> response = HttpClient.newHttpClient()
 			.send(request, HttpResponse.BodyHandlers.ofString());
-		String responseText = (String) response.body();
+		String responseText = response.body().toString();
 		
 		//Return results as a JSONObject
 		JSONObject weatherData;
