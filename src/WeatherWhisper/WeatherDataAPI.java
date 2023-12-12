@@ -32,6 +32,7 @@ public class WeatherDataAPI {
 	private ArrayList<Object> dailyMaxTemps;
 	private ArrayList<Object> dailyMinTemps;
 	private ArrayList<Object> dailySkyConditions;
+	private ArrayList<Object> hourlyWindDirections;
 	
 	// Constructor that takes String containing location name (i.e., API has not already been called -> constructor must call API)
 	public WeatherDataAPI (String inputLocation) {
@@ -47,6 +48,7 @@ public class WeatherDataAPI {
 		dailyMaxTemps = new ArrayList<Object>();
 		dailyMinTemps = new ArrayList<Object>();
 		dailySkyConditions = new ArrayList<Object>();
+		hourlyWindDirections = new ArrayList<Object>();
 		
 		// Make initial API call to fetch latest JSON weather data and extract desired weather measurements
 		updateWeatherData();
@@ -79,6 +81,7 @@ public class WeatherDataAPI {
 				setDailyMaxTemps();
 				setDailyMinTemps();
 				setDailySkyConditions();
+				setHourlyWindDirections();
 			}
 			
 		} catch (IOException | InterruptedException e) {
@@ -287,6 +290,14 @@ public class WeatherDataAPI {
 	
 	public ArrayList<Object> getHourlyWindSpeeds() {
 		return hourlyWindSpeeds;
+	}
+	
+	private void setHourlyWindDirections() {
+		hourlyWindDirections = hourlyHelper("winddir");
+	}
+	
+	public ArrayList<Object> getHourlyWindDirections() {
+		return hourlyWindDirections;
 	}
 	
 	// Stores the next 24 hours of hourly precipitation probabilities according to the hourly values for the "precipprob" key in the JSON
