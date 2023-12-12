@@ -108,19 +108,19 @@
       </Pane>
       <Pane layoutX="570.0" layoutY="386.0" prefHeight="140" prefWidth="415" styleClass="roundedPane">
          <children>
-            <Text fx:id = "sunsetSunriseDisplay" layoutX="152.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sunrise and Sunset" style="-fx-font-weight: bold;"/>
+            <Text fx:id="sunsetSunriseDisplay" layoutX="152.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Sunrise and Sunset" />
             <HBox styleClass="sunBox">
             	<VBox styleClass="sunriseVBox">
             		<ImageView fitHeight="75" fitWidth="75" pickOnBounds="true" preserveRatio="true">
-            			<Image url="@sunrise.png"/>
+            			<Image url="@sunrise.png" />
             		</ImageView>
             		<Text fx:id="sunriseT" text="sunriseTime" />
             	</VBox>
             	<VBox styleClass="sunsetVBox">
             		<ImageView fitHeight="75" fitWidth="75" pickOnBounds="true" preserveRatio="true">
-            			<Image url="@sunset.png"/>
+            			<Image url="@sunset.png" />
             		</ImageView>
-            		<Text fx:id="sunsetT" text="sunsetTime"/>
+            		<Text fx:id="sunsetT" text="sunsetTime" />
             	</VBox>
             </HBox>
          </children>
@@ -383,9 +383,9 @@
             </Tab>
         </tabs>
       </TabPane>
-      <VBox layoutX="400.0" layoutY="50.0" prefHeight="92.0" prefWidth="225.0" styleClass="labelBox">
+      <VBox alignment="TOP_CENTER" layoutX="263.0" layoutY="52.0" prefHeight="122.0" prefWidth="524.0" styleClass="labelBox">
       	<children>
-        	<HBox spacing="5" styleClass="fieldBox">
+        	<HBox alignment="TOP_CENTER" spacing="5" styleClass="fieldBox">
             	<TextField fx:id="searchBox" minHeight="30" text="Location:" />
             	<Button fx:id="searchButton" minHeight="29" minWidth="45" text="GO" />
         	</HBox>
@@ -394,7 +394,7 @@
                 	<Insets top="15.0" />
             	</padding>
         	</Label>
-        	<Text fx:id="currentTemp" style="-fx-font-size: 20px" styleClass="anchorLabel" text="Degrees" />
+        	<Text fx:id="currentTemp" style="-fx-font-size: 20px" styleClass="anchorLabel" text="Degrees" textAlignment="CENTER" wrappingWidth="525.6171875" />
         	<Label fx:id="weatherDesc" styleClass="anchorLabel" text="Weather Type" />
         	<Text fx:id="currentBound" styleClass="anchorLabel" text="H: L:" />
     	</children>
@@ -516,4 +516,3 @@
 	      </fx:define>
 	      
 </VBox>
-
