@@ -16,11 +16,37 @@
 	-fx-padding: 0 0 0 12;
 }
 
+.sunsetBox{
+	-fx-background-color: white;
+	
+}
+
+.suriseBox{
+	-fx-background-color: white;
+}
+
 .moonBox{
 	-fx-alignment: center;
 	-fx-spacing: 20;
 	-fx-padding: 0 0 0 50;
 }
+
+.sunBox{
+	-fx-alignment: center;
+	-fx-spacing: 70;
+	-fx-padding: 30 0 0 100;
+}
+
+.sunsetVBox{
+	-fx-spacing: 10;
+	-fx-alignment: center;
+}
+
+.sunriseVBox{
+	-fx-spacing: 10;
+	-fx-alignment: center;
+}
+
 
 .labelBox {
 	-fx-alignment: center;
