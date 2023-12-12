@@ -3,6 +3,7 @@ package application;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
+import javafx.scene.transform.Rotate;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -35,6 +36,7 @@ public class FXMLController {
 	@FXML ImageView backgroundGif;
 	@FXML ArrayList<ImageView> hourSymbolsF;
 	@FXML ArrayList<ImageView> hourSymbolsC;
+	@FXML Text UVIndex;
 	@FXML Text currentTemp;
 	@FXML Label weatherDesc;
 	@FXML Text compassText;
@@ -42,9 +44,12 @@ public class FXMLController {
 	@FXML Button searchButton;
 	@FXML Button hourLeft;
 	@FXML Button hourRight;
-	@FXML Image compassArrow = new Image(getClass().getResourceAsStream("compassArrow.png"));
-	@FXML ImageView dynamicArrow = new ImageView(compassArrow);
-
+	@FXML Text uvNum;
+	@FXML Image arrow = new Image(getClass().getResourceAsStream("compassArrow.png"));
+	@FXML ImageView compassArrow = new ImageView(arrow);
+	@FXML ImageView uvArrow = new ImageView(arrow);
+	Rotate compassRotation = new Rotate(0);
+	Rotate uvRotation = new Rotate(0);
 	// Read data from the given WeatherDataAPI object containing data from an API request for a particular city's weather
 	@FXML public void initialize(WeatherDataAPI weather) 
 	{
@@ -70,7 +75,7 @@ public class FXMLController {
 		
 		//initialize tag for compass info
 		compassText.setText("Wind Direction: " + directionToString(weather.getCurrentWindDirection()) + " Speed: " + weather.getCurrentWindSpeed() + " MPH");
-		dynamicArrow.setRotate(Double.parseDouble((weather.getCurrentWindDirection()).toString()));
+		initializeCompassArrow();
 		//place dates into ArrayList
 		initializeDates();
 
@@ -91,6 +96,38 @@ public class FXMLController {
 		
 		//initialize tags for hourly precipitation percentage
 		initializeHourlyPrecip(currentHour);
+	}
+	//initialize UV amount & UV Arrow
+	private void initializeUV()
+	{
+		String uvString =calledWeather.getCurrentUVindex().toString();
+		uvNum.setText(uvString);
+		int uv = Integer.parseInt(uvString);
+		double angle = 0;
+		
+		//logic for getting angle of UV
+		if (uv >= 11) angle = 162;
+		if (uv < 11 && uv >=8) angle = 126;
+		if (uv == 6 || uv == 7) angle = 90;
+		if (uv >= 3 && uv <= 5) angle = 54;
+		if (uv == 1 || uv == 2) angle = 18;
+		
+		//create arrow direction
+		uvRotation.setPivotX(uvArrow.getBoundsInLocal().getWidth()/2);
+		uvRotation.setPivotY(uvArrow.getBoundsInLocal().getHeight());
+		uvRotation.setAngle(angle);
+		uvArrow.getTransforms().clear();
+		uvArrow.getTransforms().add(uvRotation);
+	}
+	
+	//initializes direction/rotation of arrow
+	private void initializeCompassArrow()
+	{
+		compassRotation.setPivotX(compassArrow.getBoundsInLocal().getWidth()/2);
+		compassRotation.setPivotY(compassArrow.getBoundsInLocal().getHeight());
+		compassRotation.setAngle(Double.parseDouble((calledWeather.getCurrentWindDirection()).toString()));
+		compassArrow.getTransforms().clear();
+		compassArrow.getTransforms().add(compassRotation);
 	}
 	//generate string based on weather direction
 	private String directionToString(Object direction)
