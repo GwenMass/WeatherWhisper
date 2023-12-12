@@ -44,7 +44,7 @@ public class FXMLController {
 	@FXML Button searchButton;
 	@FXML Button hourLeft;
 	@FXML Button hourRight;
-	@FXML Text uvNum;
+	@FXML Text uvIndexDisplay;
 	@FXML Image arrow = new Image(getClass().getResourceAsStream("compassArrow.png"));
 	@FXML ImageView compassArrow = new ImageView(arrow);
 	@FXML ImageView uvArrow = new ImageView(arrow);
@@ -76,7 +76,8 @@ public class FXMLController {
 		address.setText(weather.getAddress().toString());
 		currentTemp.setText(weather.getCurrentTemp().toString() + "°F");
 		weatherDesc.setText(weather.getCurrentSkyConditions().toString());
-		
+		//initialize UV INFO
+		initializeUV();
 		//initialize tag for compass info
 		compassText.setText("Wind Direction: " + directionToString(weather.getCurrentWindDirection()) + " Speed: " + weather.getCurrentWindSpeed() + " MPH");
 		initializeCompassArrow();
@@ -104,17 +105,19 @@ public class FXMLController {
 	//initialize UV amount & UV Arrow
 	private void initializeUV()
 	{
+		System.out.println(calledWeather.getCurrentUVindex());
 		String uvString =calledWeather.getCurrentUVindex().toString();
-		uvNum.setText(uvString);
-		int uv = Integer.parseInt(uvString);
+		uvIndexDisplay.setText(uvString);
+		Double uv = Double.parseDouble(uvString);
 		double angle = 0;
 		
 		//logic for getting angle of UV
 		if (uv >= 11) angle = 162;
-		if (uv < 11 && uv >=8) angle = 126;
-		if (uv == 6 || uv == 7) angle = 90;
-		if (uv >= 3 && uv <= 5) angle = 54;
-		if (uv == 1 || uv == 2) angle = 18;
+		if (uv > 7 && uv < 11) angle = 126;
+		if (uv >= 5 && uv <= 7) angle = 90;
+		if (uv >2 && uv < 5) angle = 54;
+		if (uv >= 1 && uv <= 2) angle = 18;
+		if (uv == 0) angle = 0;
 		
 		//create arrow direction
 		uvRotation.setPivotX(uvArrow.getBoundsInLocal().getWidth()/2);
