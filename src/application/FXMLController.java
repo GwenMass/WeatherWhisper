@@ -51,6 +51,7 @@ public class FXMLController {
 	@FXML Text moonPhaseDisplay;
 	@FXML ImageView moonImg;
 	@FXML ArrayList<ImageView> dailySymbols;
+	@FXML ArrayList<ImageView> arrows;
 	
 	Rotate compassRotation = new Rotate(0);
 	Rotate uvRotation = new Rotate(0);
@@ -73,6 +74,7 @@ public class FXMLController {
 		setHourlyWeatherSymbols(hourSymbolsC, currentHour);
 		setDailySymbols();
 		setMoonPhase();
+		setWindArrows(currentHour);
 	
 		//initialize tags for header info
 		address.setText(weather.getAddress().toString());
@@ -338,7 +340,15 @@ public class FXMLController {
 	            "Snow, Partially cloudy", "snowy.png",
 	            "Snow", "snowy.png"
 	    );
+	    Map<String, String> nightImageMap = Map.of(
+	    		"Clear", "Night.png",
+	    		"Partially Cloudy", "partlyCloudyNight.png"
+	    );
 	    
+	    ZonedDateTime sunsetTime = calledWeather.getSunsetTime();
+        ZonedDateTime sunriseTime = calledWeather.getSunriseTime();
+        ZonedDateTime currentTime = calledWeather.getTime();
+        
 	    int iterator = 0;
 	    //Loop for setting the images
 	    for (ImageView iv : hourSymbols) {
@@ -346,7 +356,12 @@ public class FXMLController {
 	        String condition = current.toString();
 	        
 	        // Check if a key is true and set the correct symbol
-	        if (conditionImageMap.containsKey(condition)) {
+	        if(nightImageMap.containsKey(condition) && (currentTime.isAfter(sunsetTime) && currentTime.isBefore(sunriseTime))) {
+	        	String imagePath = getClass().getResource(nightImageMap.get(condition)).toExternalForm();
+	            Image image = new Image(imagePath);
+	            iv.setImage(image);
+	        }
+	        else if (conditionImageMap.containsKey(condition)) {
 	            String imagePath = getClass().getResource(conditionImageMap.get(condition)).toExternalForm();
 	            Image image = new Image(imagePath);
 	            iv.setImage(image);
@@ -410,5 +425,31 @@ public class FXMLController {
 	            iv.setImage(image);
 	        }
 	    }
+	}
+	
+	private void setWindArrows(int startinghour) {
+		List<Object> windDirectionsList = calledWeather.getHourlyWindDirections();
+
+		//Get the image arrow.png
+		String imagePath = getClass().getResource("arrow.png").toExternalForm();
+		Image arrowImage = new Image(imagePath);
+
+		int iterator = 0;
+
+		for (Object windDirectionObject : windDirectionsList) {
+		    
+			//Parse for wind direction angle
+		    double windDirection = Double.parseDouble(windDirectionObject.toString());
+		    System.out.println(windDirection);
+		    
+		    //Set the image and i++
+		    if (iterator < arrows.size()) {
+		        ImageView iv = arrows.get(iterator);
+		        iv.setImage(arrowImage);
+		        iv.setRotate(windDirection); // Set the rotation angle based on the wind direction
+
+		        iterator++;
+		    }
+		}
 	}
 }
