@@ -32,35 +32,35 @@
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
                         <Text fx:id="day1" layoutX="7.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D1" />
-                        <ImageView fx:id="dailyImg1" fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="dailyImg1" fitHeight="40.0" fitWidth="40.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
                         <Text fx:id="day1Bound" layoutX="230" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
                         <Text fx:id="day2" layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D2" />
-                        <ImageView fx:id="dailyImg2" fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="dailyImg2" fitHeight="40.0" fitWidth="40.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
                         <Text fx:id="day2Bound" layoutX="230" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
                         <Text fx:id="day3" layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D3" />
-                        <ImageView fx:id="dailyImg3" fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="dailyImg3" fitHeight="40.0" fitWidth="40.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
                        <Text fx:id="day3Bound" layoutX="230" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
                         <Text fx:id="day4" layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D4" />
-                        <ImageView fx:id="dailyImg4" fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="dailyImg4" fitHeight="40.0" fitWidth="40.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
                         <Text fx:id="day4Bound" layoutX="230" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
                   <Pane prefHeight="38.0" prefWidth="318.0">
                      <children>
                         <Text fx:id="day5" layoutX="7.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="D5" />
-                        <ImageView fx:id="dailyImg5" fitHeight="25.0" fitWidth="33.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="dailyImg5" fitHeight="40.0" fitWidth="40.0" layoutX="134.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
                         <Text fx:id="day5Bound" layoutX="230" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="H: L:" />
                      </children>
                   </Pane>
