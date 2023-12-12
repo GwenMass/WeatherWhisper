@@ -108,19 +108,19 @@
       </Pane>
       <Pane layoutX="570.0" layoutY="386.0" prefHeight="140" prefWidth="415" styleClass="roundedPane">
          <children>
-            <Text fx:id = "sunsetSunriseDisplay" layoutX="150.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sunset and Sunrise: " style="-fx-font-weight: bold;"/>
+            <Text fx:id = "sunsetSunriseDisplay" layoutX="152.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sunrise and Sunset" style="-fx-font-weight: bold;"/>
             <HBox styleClass="sunBox">
-            	<VBox styleClass="sunsetVBox">
-            		<ImageView fitHeight="75" fitWidth="75" pickOnBounds="true" preserveRatio="true">
-            			<Image url="@sunset.png"/>
-            		</ImageView>
-            		<Text fx:id="sunsetT" text="sunsetTime"/>
-            	</VBox>
             	<VBox styleClass="sunriseVBox">
             		<ImageView fitHeight="75" fitWidth="75" pickOnBounds="true" preserveRatio="true">
             			<Image url="@sunrise.png"/>
             		</ImageView>
             		<Text fx:id="sunriseT" text="sunriseTime" />
+            	</VBox>
+            	<VBox styleClass="sunsetVBox">
+            		<ImageView fitHeight="75" fitWidth="75" pickOnBounds="true" preserveRatio="true">
+            			<Image url="@sunset.png"/>
+            		</ImageView>
+            		<Text fx:id="sunsetT" text="sunsetTime"/>
             	</VBox>
             </HBox>
          </children>
