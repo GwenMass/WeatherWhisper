@@ -203,7 +203,7 @@ public class FXMLController {
 		int iterator = 0;
 		for (Text text : hourFahrenheit)
 		{
-			text.setText((calledWeather.getHourlyTemps().get(iterator++)).toString());
+			text.setText((calledWeather.getHourlyTemps().get(iterator++)).toString()+"F");
 		}
 	}
 	
