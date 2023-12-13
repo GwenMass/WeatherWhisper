@@ -27,12 +27,12 @@ public class WeatherDataAPI {
 	private ArrayList<Object> hourlyTemps;
 	private ArrayList<Object> hourlySkyConditions;
 	private ArrayList<Object> hourlyWindSpeeds;
+	private ArrayList<Object> hourlyWindDirections;
 	private ArrayList<Object> hourlyPrecipProbs;
 	private ArrayList<Object> hourlyHumidities;
 	private ArrayList<Object> dailyMaxTemps;
 	private ArrayList<Object> dailyMinTemps;
 	private ArrayList<Object> dailySkyConditions;
-	private ArrayList<Object> hourlyWindDirections;
 	
 	// Constructor that takes String containing location name (i.e., API has not already been called -> constructor must call API)
 	public WeatherDataAPI (String inputLocation) {
@@ -41,14 +41,14 @@ public class WeatherDataAPI {
 		
 		// Initialize ArrayList fields
 		hourlyTemps = new ArrayList<Object>();
+		hourlySkyConditions = new ArrayList<Object>();
 		hourlyWindSpeeds = new ArrayList<Object>();
+		hourlyWindDirections = new ArrayList<Object>();
 		hourlyPrecipProbs = new ArrayList<Object>();
 		hourlyHumidities = new ArrayList<Object>();
-		hourlySkyConditions = new ArrayList<Object>();
 		dailyMaxTemps = new ArrayList<Object>();
 		dailyMinTemps = new ArrayList<Object>();
 		dailySkyConditions = new ArrayList<Object>();
-		hourlyWindDirections = new ArrayList<Object>();
 		
 		// Make initial API call to fetch latest JSON weather data and extract desired weather measurements
 		updateWeatherData();
@@ -76,12 +76,12 @@ public class WeatherDataAPI {
 				setHourlyTemps();
 				setHourlySkyConditions();
 				setHourlyWindSpeeds();
+				setHourlyWindDirections();
 				setHourlyPrecipProbs();
 				setHourlyHumidities();
 				setDailyMaxTemps();
 				setDailyMinTemps();
 				setDailySkyConditions();
-				setHourlyWindDirections();
 			}
 			
 		} catch (IOException | InterruptedException e) {
@@ -106,7 +106,7 @@ public class WeatherDataAPI {
 		resolvedAddress = weatherDataJSON.get("resolvedAddress");
 	}
 	
-	public Object getAddress() {
+	public Object getResolvedAddress() {
 		return resolvedAddress;
 	}
 	
@@ -125,12 +125,8 @@ public class WeatherDataAPI {
 		currentTime = ZonedDateTime.of(systemTime, systemZone).withZoneSameInstant(locationZone);
 	}
 
-	public ZonedDateTime getTime() {
+	public ZonedDateTime getCurrentTime() {
 		return currentTime;
-	}
-	
-	public int getHour() {
-		return currentTime.getHour();
 	}
 	
 	// For either a sunrise or a sunset (specified by keyInJSON), generates a ZonedDateTime object for the time of that twilight at the location.
@@ -252,7 +248,7 @@ public class WeatherDataAPI {
 		ArrayList<Object> hourlyData = new ArrayList<Object>();
 		
 		// Starting at currentHour + 1, append today's (i.e., day 0) remaining hourly data values (i.e., until !(hour < 24)) for the given keyInJSON
-		int currentHour = getHour();
+		int currentHour = getCurrentTime().getHour();
 		for(int hour = currentHour + 1; hour < 24; hour++) {
 			hourlyData.add(weatherDataJSON.getJSONArray("days").getJSONObject(0).getJSONArray("hours").getJSONObject(hour).get(keyInJSON));
 		}
@@ -292,6 +288,7 @@ public class WeatherDataAPI {
 		return hourlyWindSpeeds;
 	}
 	
+	// Stores the next 24 hours of hourlyWindDirections according to the hourly values for the "winddir" key in the JSON
 	private void setHourlyWindDirections() {
 		hourlyWindDirections = hourlyHelper("winddir");
 	}

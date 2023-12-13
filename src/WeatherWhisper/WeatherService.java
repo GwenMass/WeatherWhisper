@@ -41,7 +41,7 @@ public class WeatherService {
 		JSONObject weatherData;
 		
 		// Create a validAddress key based on whether input location generated Bad API Request or not
-		if(responseText.equals("Bad API Request:Invalid location parameter value.")) {
+		if(responseText.equals("Bad API Request:Invalid location parameter value.") || responseText.equals("Bad API Request:A location must be specified")) {
 			weatherData = new JSONObject();
 			weatherData.put("validAddress", false);
 		}

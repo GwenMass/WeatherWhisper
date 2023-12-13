@@ -61,8 +61,8 @@ public class FXMLController {
 	@FXML public void initialize(WeatherDataAPI weather) 
 	{
 		calledWeather = weather;
-		date = calledWeather.getTime();
-		currentHour = calledWeather.getHour();
+		date = calledWeather.getCurrentTime();
+		currentHour = calledWeather.getCurrentTime().getHour();
 		viewHour = currentHour;
 
 		//set actions to buttons 
@@ -80,7 +80,7 @@ public class FXMLController {
 		setSunTimes();
 	
 		//initialize tags for header info
-		address.setText(weather.getAddress().toString());
+		address.setText(weather.getResolvedAddress().toString());
 		currentTemp.setText(weather.getCurrentTemp().toString() + "°F");
 		weatherDesc.setText(weather.getCurrentSkyConditions().toString());
 		//initialize UV INFO
@@ -112,7 +112,7 @@ public class FXMLController {
 	//initialize UV amount & UV Arrow
 	private void initializeUV()
 	{
-		System.out.println("UV:" + calledWeather.getCurrentUVindex());
+		//System.out.println("UV:" + calledWeather.getCurrentUVindex());
 		String uvString =calledWeather.getCurrentUVindex().toString();
 		uvIndexDisplay.setText(uvString);
 		Double uv = Double.parseDouble(uvString);
@@ -124,7 +124,7 @@ public class FXMLController {
 		if (uv >2 && uv < 6) angle = -40;
 		if (uv > 0 && uv <= 2) angle = -75;
 		if (uv ==0) angle = -90;
-		System.out.println("angle:" + angle);
+		//System.out.println("angle:" + angle);
 		//create arrow direction
 		uvRotation.setPivotX(uvArrow.getBoundsInLocal().getWidth()/2);
 		uvRotation.setPivotY(uvArrow.getBoundsInLocal().getHeight());
@@ -288,7 +288,6 @@ public class FXMLController {
 	{
 		String loc = searchBox.getText();
 		WeatherDataAPI searchLoc = new WeatherDataAPI(loc);
-		//searchLoc.updateWeatherData();	//unnecessary I think, as updateWeatherData() is called inside WeatherDataAPI constructor anyways
 		
 		// Only initialize location searched by user if API recognized location and returned valid JSON
 		if(searchLoc.isValid())
@@ -349,7 +348,7 @@ public class FXMLController {
 	    
 	    ZonedDateTime sunsetTime = calledWeather.getSunsetTime();
         ZonedDateTime sunriseTime = calledWeather.getSunriseTime();
-        ZonedDateTime currentTime = calledWeather.getTime();
+        ZonedDateTime currentTime = calledWeather.getCurrentTime();
         
 	    int iterator = 0;
 	    //Loop for setting the images
