@@ -267,50 +267,50 @@
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour1.text}" />
-                                    <Text fx:id="hour1Wind" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
-                                    <ImageView fx:id="arrow1" fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour1Wind" layoutX="20.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <ImageView fx:id="arrow1" fitHeight="34.0" fitWidth="50.0" layoutX="30" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour2.text}" />
-                                    <Text fx:id="hour2Wind" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
-                                    <ImageView fx:id="arrow2" fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour2Wind" layoutX="20.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <ImageView fx:id="arrow2" fitHeight="34.0" fitWidth="50.0" layoutX="30" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour3.text}" />
-                                    <Text fx:id="hour3Wind" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
-                                    <ImageView fx:id="arrow3" fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour3Wind" layoutX="20.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <ImageView fx:id="arrow3" fitHeight="34.0" fitWidth="50.0" layoutX="30" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour4.text}" />
-                                    <Text fx:id="hour4Wind" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
-                                    <ImageView fx:id="arrow4" fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour4Wind" layoutX="20.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <ImageView fx:id="arrow4" fitHeight="34.0" fitWidth="50.0" layoutX="30" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour5.text}" />
-                                    <Text fx:id="hour5Wind" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
-                                    <ImageView fx:id="arrow5" fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour5Wind" layoutX="20.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <ImageView fx:id="arrow5" fitHeight="34.0" fitWidth="50.0" layoutX="30" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour6.text}" />
-                                    <Text fx:id="hour6Wind" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
-                                    <ImageView fx:id="arrow6" fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour6Wind" layoutX="20.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <ImageView fx:id="arrow6" fitHeight="34.0" fitWidth="50.0" layoutX="30" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour7.text}" />
-                                    <Text fx:id="hour7Wind" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
-                                    <ImageView fx:id="arrow7" fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour7Wind" layoutX="20.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MPH" />
+                                    <ImageView fx:id="arrow7" fitHeight="34.0" fitWidth="50.0" layoutX="30" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
                                  </children>
                               </Pane>
                            </children>
@@ -331,50 +331,43 @@
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
 									<Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour1.text}" />
-                                    <Text fx:id="hour1Precip" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour1Precip" layoutX="27.0" layoutY="50" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" style="-fx-font-size: 14"/>
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour2.text}" />
-                                    <Text fx:id="hour2Precip" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour2Precip" layoutX="27.0" layoutY="50" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" style="-fx-font-size: 14"/>
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour3.text}" />
-                                    <Text fx:id="hour3Precip" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour3Precip" layoutX="27.0" layoutY="50" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" style="-fx-font-size: 14"/>
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour4.text}" />
-                                    <Text fx:id="hour4Precip" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour4Precip" layoutX="27.0" layoutY="50" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" style="-fx-font-size: 14"/>
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour5.text}" />
-                                    <Text fx:id="hour5Precip" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour5Precip" layoutX="27.0" layoutY="50" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" style="-fx-font-size: 14"/>
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour6.text}" />
-                                    <Text fx:id="hour6Precip" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour6Precip" layoutX="27.0" layoutY="50" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" style="-fx-font-size: 14"/>
                                  </children>
                               </Pane>
                               <Pane prefHeight="87.0" prefWidth="68.0">
                                  <children>
                                     <Text layoutX="27.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="${hour7.text}" />
-                                    <Text fx:id="hour7Precip" layoutX="27.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" />
-                                    <ImageView fitHeight="34.0" fitWidth="50.0" layoutX="9.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="hour7Precip" layoutX="27.0" layoutY="50" strokeType="OUTSIDE" strokeWidth="0.0" text="'%'" style="-fx-font-size: 14" />
                                  </children>
                               </Pane>
                            </children>
