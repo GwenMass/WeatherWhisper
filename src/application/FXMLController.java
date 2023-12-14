@@ -112,7 +112,6 @@ public class FXMLController {
 	//initialize UV amount & UV Arrow
 	private void initializeUV()
 	{
-		//System.out.println("UV:" + calledWeather.getCurrentUVindex());
 		String uvString =calledWeather.getCurrentUVindex().toString();
 		uvIndexDisplay.setText(uvString);
 		Double uv = Double.parseDouble(uvString);
@@ -124,7 +123,6 @@ public class FXMLController {
 		if (uv >2 && uv < 6) angle = -40;
 		if (uv > 0 && uv <= 2) angle = -75;
 		if (uv ==0) angle = -90;
-		//System.out.println("angle:" + angle);
 		//create arrow direction
 		uvRotation.setPivotX(uvArrow.getBoundsInLocal().getWidth()/2);
 		uvRotation.setPivotY(uvArrow.getBoundsInLocal().getHeight());
@@ -372,20 +370,15 @@ public class FXMLController {
 	    for (ImageView iv : hourSymbols) {
 	        Object current = calledWeather.getHourlySkyConditions().get(iterator++);
 	        String condition = current.toString();
-	        System.out.println(condition);
-	        System.out.println(nightImageMap.containsKey(condition));
 	        // Check if a key is true and set the correct symbol
 	        if(nightImageMap.containsKey(condition) && ((currentTime.isAfter(sunsetTime) || currentTime.isBefore(sunriseTime)))) {
-	        //	System.out.println("Sunrise: " + sunriseTime + "\nSunset: " + sunsetTime + "\nCurrent Time: " + currentTime);
 	        	String imagePath = getClass().getResource(nightImageMap.get(condition)).toExternalForm();
 	            Image image = new Image(imagePath);
-	         //   System.out.println(imagePath);
 	            iv.setImage(image);
 	        }
 	        else if (conditionImageMap.containsKey(condition)) {
 	            String imagePath = getClass().getResource(conditionImageMap.get(condition)).toExternalForm();
 	            Image image = new Image(imagePath);
-	          //  System.out.println(imagePath);
 	            iv.setImage(image);
 	        }
 	    }
