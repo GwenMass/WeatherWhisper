@@ -22,7 +22,7 @@ public class FXMLController {
 	
 	private WeatherDataAPI calledWeather;
 	private ZonedDateTime date;
-	private int currentHour;
+	//private int currentHour;
 	//private int viewHour;
 
 	// Tags for injection
@@ -64,7 +64,7 @@ public class FXMLController {
 		// Store WeatherDataAPI object and datetime information
 		calledWeather = weather;
 		date = calledWeather.getCurrentTime();
-		currentHour = calledWeather.getCurrentTime().getHour();
+		//currentHour = calledWeather.getCurrentTime().getHour();
 		//viewHour = currentHour;
 
 		// Set actions to buttons 
@@ -73,6 +73,7 @@ public class FXMLController {
 		//hourLeft.setOnAction(this::shiftHourHandler);
 		//hourRight.setOnAction(this::shiftHourHandler);
 		
+		// Set various graphics, plus sunset/sunrise display times
 		setBackground();
 		setHourlyWeatherSymbols(hourSymbolsF);
 		setHourlyWeatherSymbols(hourSymbolsC);
