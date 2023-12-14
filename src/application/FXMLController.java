@@ -19,12 +19,13 @@ import java.time.ZonedDateTime;
 import WeatherWhisper.WeatherDataAPI;
 
 public class FXMLController {
+	
 	private WeatherDataAPI calledWeather;
-	ZonedDateTime date;
-	int currentHour;
-	int viewHour;
+	private ZonedDateTime date;
+	private int currentHour;
+	//private int viewHour;
 
-	//tags for injection
+	// Tags for injection
 	@FXML ArrayList<Text> dayLabel;
 	@FXML ArrayList<Text> hour;
 	@FXML ArrayList<Text> dayBound;
@@ -57,73 +58,64 @@ public class FXMLController {
 	
 	Rotate compassRotation = new Rotate(0);
 	Rotate uvRotation = new Rotate(0);
-	// Read data from the given WeatherDataAPI object containing data from an API request for a particular city's weather
-	@FXML public void initialize(WeatherDataAPI weather) 
-	{
+	
+	// Initialize all weather data from a given WeatherDataAPI object representing the weather at a specific location and time
+	@FXML public void initialize(WeatherDataAPI weather) {
+		// Store WeatherDataAPI object and datetime information
 		calledWeather = weather;
 		date = calledWeather.getCurrentTime();
 		currentHour = calledWeather.getCurrentTime().getHour();
-		viewHour = currentHour;
+		//viewHour = currentHour;
 
-		//set actions to buttons 
+		// Set actions to buttons 
 		searchButton.setOnAction(this::searchHandler);
 		searchBox.setOnMouseClicked(this::searchTextHandler);
 		//hourLeft.setOnAction(this::shiftHourHandler);
 		//hourRight.setOnAction(this::shiftHourHandler);
 		
 		setBackground();
-		setHourlyWeatherSymbols(hourSymbolsF, currentHour);
-		setHourlyWeatherSymbols(hourSymbolsC, currentHour);
+		setHourlyWeatherSymbols(hourSymbolsF);
+		setHourlyWeatherSymbols(hourSymbolsC);
 		setDailySymbols();
 		setMoonPhase();
-		setWindArrows(currentHour);
+		setWindArrows();
 		setSunTimes();
 	
 		//initialize tags for header info
 		address.setText(weather.getResolvedAddress().toString());
 		currentTemp.setText(weather.getCurrentTemp().toString() + "°F");
 		weatherDesc.setText(weather.getCurrentSkyConditions().toString());
-		//initialize UV INFO
+		
+		// Initialize tags for UV info, compass info, dates, hours, daily temperature bounds, hourly temperatures in C and F, 
+		// hourly wind speeds/directions, and hourly precipitation percentages
 		initializeUV();
-		//initialize tag for compass info
 		compassText.setText("Wind Direction: " + directionToString(weather.getCurrentWindDirection()) + " Speed: " + weather.getCurrentWindSpeed() + " MPH");
 		initializeCompassArrow();
-		//place dates into ArrayList
 		initializeDates();
-
-		//initialize tags for hours 
-		initializeHours(currentHour);
-		
-		//initialize tags for daily temperature bounds
+		initializeHours();
 		initializeBounds();
-		
-		//initialize tags for hourly temperatures in Fahrenheit
-		initializeHourlyFahrenheit(currentHour);
-		
-		//initialize tags for hour temperatures in Celsius
-		initializeHourlyCelsius(currentHour);
-		
-		//initialize  tags for hourly winds
-		initializeHourlyWind(currentHour);
-		
-		//initialize tags for hourly precipitation percentage
-		initializeHourlyPrecip(currentHour);
+		initializeHourlyFahrenheit();
+		initializeHourlyCelsius();
+		initializeHourlyWind();
+		initializeHourlyPrecip();
 	}
-	//initialize UV amount & UV Arrow
-	private void initializeUV()
-	{
-		String uvString =calledWeather.getCurrentUVindex().toString();
+	
+	// Initialize UV value & UV Arrow
+	private void initializeUV() {
+		String uvString = calledWeather.getCurrentUVindex().toString();
 		uvIndexDisplay.setText(uvString);
 		Double uv = Double.parseDouble(uvString);
 		double angle = 0;
-		//logic for getting angle of UV
+		
+		// Use UV value to determine angle of arrow for display
 		if (uv >= 11) angle = 75;
-		if (uv >7 && uv < 11) angle = 40;
-		if (uv >= 6 && uv <= 7) angle = 0;
-		if (uv >2 && uv < 6) angle = -40;
-		if (uv > 0 && uv <= 2) angle = -75;
-		if (uv ==0) angle = -90;
-		//create arrow direction
+		else if (uv >7 && uv < 11) angle = 40;
+		else if (uv >= 6 && uv <= 7) angle = 0;
+		else if (uv >2 && uv < 6) angle = -40;
+		else if (uv > 0 && uv <= 2) angle = -75;
+		else if (uv ==0) angle = -90;
+		
+		// Create arrow direction
 		uvRotation.setPivotX(uvArrow.getBoundsInLocal().getWidth()/2);
 		uvRotation.setPivotY(uvArrow.getBoundsInLocal().getHeight());
 		uvRotation.setAngle(angle);
@@ -131,159 +123,126 @@ public class FXMLController {
 		uvArrow.getTransforms().add(uvRotation);
 	}
 	
-	//initializes direction/rotation of arrow
-	private void initializeCompassArrow()
-	{
+	// Initializes direction/rotation of arrow
+	private void initializeCompassArrow() {
 		compassRotation.setPivotX(compassArrow.getBoundsInLocal().getWidth()/2);
 		compassRotation.setPivotY(compassArrow.getBoundsInLocal().getHeight());
 		compassRotation.setAngle(Double.parseDouble((calledWeather.getCurrentWindDirection()).toString()));
 		compassArrow.getTransforms().clear();
 		compassArrow.getTransforms().add(compassRotation);
 	}
-	//generate string based on weather direction
-	private String directionToString(Object direction)
-	{
+	
+	// Generate string based on weather direction
+	private String directionToString(Object direction) {
 		var dir = Double.parseDouble(direction.toString());
+		
 		if (dir >= 75 && dir <=105)
-		{
 			return "E";
-		}
-			
-		if (dir > 105 && dir < 165)
+		else if (dir > 105 && dir < 165)
 			return "SE";
-		if (dir >=165 && dir <= 195)
+		else if (dir >=165 && dir <= 195)
 			return "S";
-		if (dir > 195 && dir < 255)
+		else if (dir > 195 && dir < 255)
 			return "SW";
-		if (dir >= 255 && dir <= 285)
+		else if (dir >= 255 && dir <= 285)
 			return "W";
-		if (dir > 285 && dir < 345)
+		else if (dir > 285 && dir < 345)
 			return "NW";
-		if ((dir >= 345 && dir <=360) || dir >= 0 && dir <= 15)
+		else if ((dir >= 345 && dir <=360) || dir >= 0 && dir <= 15)
 			return "N";
-		if (dir > 15 && dir < 75)
+		else if (dir > 15 && dir < 75)
 			return "NE";
 		else return "Problem designating direction...";
 	}
 	
-	//initalizes the dates 
-	private void initializeDates()
-	{
+	// Initializes the dates 
+	private void initializeDates() {
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd");
 		int iterator = 1;
-		for (Text text : dayLabel)
-		{
-			DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd");
+		
+		for (Text text : dayLabel) {
 			text.setText(date.plusDays(iterator).getDayOfWeek() + " " + dateFormat.format(date.plusDays(iterator)));
 			iterator++;
 		}
 	}
 	
-	//initialize hours
-	private void initializeHours(int startingHour)
-	{
+	// Initialize hours
+	private void initializeHours() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h a");
 		int iterator = 1;
+		
 		for (Text text : hour)
-		{
-			text.setText(timeToString((currentHour + iterator++) % 24));
-		}
+			text.setText(date.plusHours(iterator++).format(formatter));
 	}
 	
 	//initialize daily bounds
-	private void initializeBounds()
-	{
+	private void initializeBounds() {
 		int iterator = 0;
-		for (Text text : dayBound)
-		{
+		
+		for (Text text : dayBound) {
 			text.setText((calledWeather.getDailyMaxTemps().get(iterator) + "°F/" + calledWeather.getDailyMinTemps().get(iterator) + "°F"));
 			iterator++;
 		}
 	}
 	
 	//initialize hourly farenheit temps
-	private void initializeHourlyFahrenheit(int startingHour)
-	{
+	private void initializeHourlyFahrenheit() {
 		int iterator = 0;
-		for (Text text : hourFahrenheit)
-		{
+		
+		for (Text text : hourFahrenheit) {
 			text.setText((calledWeather.getHourlyTemps().get(iterator++)).toString()+"F");
 		}
 	}
 	
 	//initialize hourly celsius temps
-	private void initializeHourlyCelsius(int startingHour)
-	{
+	private void initializeHourlyCelsius() {
 		int iterator = 0;
+		
 		for (Text text : hourCelsius)
-		{
 			text.setText(toCelsius(calledWeather.getHourlyTemps().get(iterator++)));
-		}
 	}
 	
 	//initalize hourly wind speeds
-	private void initializeHourlyWind(int startingHour)
-	{
+	private void initializeHourlyWind() {
 		int iterator = 0;
+		
 		for (Text text : hourWind)
-		{
 			text.setText(calledWeather.getHourlyWindSpeeds().get(iterator++) + "MPH");
-		}
 	}
 	
 	//initalize hourly precipitation chance
-	private void initializeHourlyPrecip(int startingHour)
-	{
+	private void initializeHourlyPrecip() {
 		int iterator = 0;
+		
 		for (Text text : hourPrecip)
-		{
 			text.setText(calledWeather.getHourlyPrecipProbs().get(iterator++) + "%");
-		}
-	}
-	
-	//return string based on AM or PM of time
-	private String timeToString(int hour)
-	{
-		if (hour == 0)
-				return "12 AM";
-		if (hour == 12)
-			return "12 PM";
-		if (hour > 12)
-		{
-			return hour - 12 + "PM";
-		}
-		else return hour + "AM";
 	}
 	
 	//convert farenheit to celsius
-	private String toCelsius(Object fahrenheit)
-	{
+	private String toCelsius(Object fahrenheit) {
 		DecimalFormat dFormat = new DecimalFormat("#.#");
 		return (dFormat.format((Double.parseDouble(fahrenheit.toString())-32)*5/9))+"°C";
 	}
 	
-	//reloads hours when time is shifted
-	private void shiftHourHandler(ActionEvent e)
-	{
-		if (e.getSource().equals(hourLeft))
-		{
+	// Reloads hours when time is shifted 
+	// Unimplemented, ended up being unnecessary. Remains commented out for future, post-semester experimentation.
+	/*
+	private void shiftHourHandler(ActionEvent e) {
+		if (e.getSource().equals(hourLeft)) {
 			if (!(viewHour == currentHour)){viewHour--;}
 		}
-		else if (e.getSource().equals(hourRight))
-		{
+		else if (e.getSource().equals(hourRight)) {
 			if (!(viewHour == currentHour+7)) {viewHour++;}
 		}
-		
-	}
+	}*/
 	
 	//Clears textbox when clicked
-	private void searchTextHandler(MouseEvent e)
-	{
+	private void searchTextHandler(MouseEvent e) {
 		searchBox.setText("");
 	}
 	
-	
 	//generates new JFX based on search action
-	private void searchHandler(ActionEvent e)
-	{
+	private void searchHandler(ActionEvent e) {
 		String loc = searchBox.getText();
 		WeatherDataAPI searchLoc = new WeatherDataAPI(loc);
 		
@@ -293,7 +252,6 @@ public class FXMLController {
 		// else indicate invalid location to user somehow perhaps?
 		else searchBox.setText("Invalid Location, Try again");
 	}
-	
 	
 	//Set the background to the correct correlating sky condition
 	private void setBackground() {
@@ -328,9 +286,9 @@ public class FXMLController {
 	        ZonedDateTime currentTime = calledWeather.getCurrentTime();
 	        
 	        if (conditionNightMap.containsKey(condition) && ((currentTime.isAfter(sunsetTime) || currentTime.isBefore(sunriseTime)))) {
-	        String imagePath = getClass().getResource(conditionNightMap.get(condition)).toExternalForm();
-            Image image = new Image(imagePath);
-            backgroundGif.setImage(image);
+		        String imagePath = getClass().getResource(conditionNightMap.get(condition)).toExternalForm();
+	            Image image = new Image(imagePath);
+	            backgroundGif.setImage(image);
 	    	}
 	        // Check if a key is true and set the correct background image
 	        else if (conditionImageMap.containsKey(condition)) {
@@ -338,12 +296,14 @@ public class FXMLController {
 	            Image image = new Image(imagePath);
 	            backgroundGif.setImage(image);
 	            
-	        } else {
-	            System.out.println("Condition Not Found Error!");
-	        }
+	        } 
+	        
+	        else System.out.println("Condition Not Found Error!");
 	    }
+	    
 	}	
-	private void setHourlyWeatherSymbols(List<ImageView> hourSymbols, int startingHour) {
+	
+	private void setHourlyWeatherSymbols(List<ImageView> hourSymbols) {
 		//Map of sky condition output --> correlating symbols
 	    Map<String, String> conditionImageMap = Map.of(
 	            "Clear", "Sunny.png",
@@ -384,8 +344,7 @@ public class FXMLController {
 	    }
 	}
 	
-	private void setMoonPhase()
-	{
+	private void setMoonPhase() {
 		Object currConditions = calledWeather.getMoonPhase();
 		
 		if (currConditions != null) {
@@ -414,6 +373,7 @@ public class FXMLController {
 	        }
 		}
 	}
+	
 	private void setDailySymbols() {
 		//Map of sky condition output --> correlating symbols
 	    Map<String, String> conditionImageMap = Map.of(
@@ -442,7 +402,7 @@ public class FXMLController {
 	    }
 	}
 	
-	private void setWindArrows(int startinghour) {
+	private void setWindArrows() {
 		List<Object> windDirectionsList = calledWeather.getHourlyWindDirections();
 
 		//Get the image arrow.png
@@ -466,17 +426,19 @@ public class FXMLController {
 		    }
 		}
 	}
+	
 	private void setSunTimes() {
-		//Set sunset
-
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm a");
+		
+		// Set display for sunset time
 		ZonedDateTime sunsetTime = calledWeather.getSunsetTime();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 		String formattedSunsetTime = sunsetTime.format(formatter);
 		sunsetT.setText(formattedSunsetTime);
 		
-		//Set sunrise
+		// Set display for sunrise time
 		ZonedDateTime sunriseTime = calledWeather.getSunriseTime();
 		String formattedSunriseTime = sunriseTime.format(formatter);
 		sunriseT.setText(formattedSunriseTime);
 	}
+	
 }
