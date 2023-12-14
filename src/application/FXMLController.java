@@ -316,9 +316,26 @@ public class FXMLController {
 	                "Snow, Partially cloudy", "snowy.gif",
 	                "Snow", "snowy.gif"
 	        );
-
+	        
+	        Map<String,String> conditionNightMap = Map.of(
+	        		
+	        		"Clear", "clearNight.gif",
+	        		"Overcast", "cloudyNight.gif",
+	        		"Partially cloudy", "partlyCloudyNight.gif",	
+	        		"Snow", "snowyNight.gif"
+    		);
+	        
+	        ZonedDateTime sunsetTime = calledWeather.getSunsetTime();
+	        ZonedDateTime sunriseTime = calledWeather.getSunriseTime();
+	        ZonedDateTime currentTime = calledWeather.getCurrentTime();
+	        
+	        if (conditionNightMap.containsKey(condition) && ((currentTime.isAfter(sunsetTime) || currentTime.isBefore(sunriseTime)))) {
+	        String imagePath = getClass().getResource(conditionNightMap.get(condition)).toExternalForm();
+            Image image = new Image(imagePath);
+            backgroundGif.setImage(image);
+	    	}
 	        // Check if a key is true and set the correct background image
-	        if (conditionImageMap.containsKey(condition)) {
+	        else if (conditionImageMap.containsKey(condition)) {
 	            String imagePath = getClass().getResource(conditionImageMap.get(condition)).toExternalForm();
 	            Image image = new Image(imagePath);
 	            backgroundGif.setImage(image);
@@ -343,7 +360,7 @@ public class FXMLController {
 	    );
 	    Map<String, String> nightImageMap = Map.of(
 	    		"Clear", "Night.png",
-	    		"Partially Cloudy", "partlyCloudyNight.png"
+	    		"Partially cloudy", "partlyCloudyNight.png"
 	    );
 	    
 	    ZonedDateTime sunsetTime = calledWeather.getSunsetTime();
@@ -355,16 +372,20 @@ public class FXMLController {
 	    for (ImageView iv : hourSymbols) {
 	        Object current = calledWeather.getHourlySkyConditions().get(iterator++);
 	        String condition = current.toString();
-	        
+	        System.out.println(condition);
+	        System.out.println(nightImageMap.containsKey(condition));
 	        // Check if a key is true and set the correct symbol
-	        if(nightImageMap.containsKey(condition) && (currentTime.isAfter(sunsetTime) && currentTime.isBefore(sunriseTime))) {
+	        if(nightImageMap.containsKey(condition) && ((currentTime.isAfter(sunsetTime) || currentTime.isBefore(sunriseTime)))) {
+	        //	System.out.println("Sunrise: " + sunriseTime + "\nSunset: " + sunsetTime + "\nCurrent Time: " + currentTime);
 	        	String imagePath = getClass().getResource(nightImageMap.get(condition)).toExternalForm();
 	            Image image = new Image(imagePath);
+	         //   System.out.println(imagePath);
 	            iv.setImage(image);
 	        }
 	        else if (conditionImageMap.containsKey(condition)) {
 	            String imagePath = getClass().getResource(conditionImageMap.get(condition)).toExternalForm();
 	            Image image = new Image(imagePath);
+	          //  System.out.println(imagePath);
 	            iv.setImage(image);
 	        }
 	    }
