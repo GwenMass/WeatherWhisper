@@ -319,7 +319,7 @@ public class FXMLController {
 	        
 	        Map<String,String> conditionNightMap = Map.of(
 	        		
-	        		"Clear", "clearNight.gif",
+	        		"Clear", "nightClear.gif",
 	        		"Overcast", "cloudyNight.gif",
 	        		"Partially cloudy", "partlyCloudyNight.gif",	
 	        		"Snow", "snowyNight.gif"
